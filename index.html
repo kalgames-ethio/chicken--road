@@ -3,339 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalgames - Chicken Road Premium</title>
+    <title>Kalgames - Game Center</title>
     <style>
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            background-color: #101115;
-            color: #fff;
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-        .top-bar {
-            width: 100%;
-            max-width: 385px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 14px;
-            background: #1b1c21;
-            border-bottom: 2px solid #141519;
-        }
-        .logo { font-size: 18px; font-weight: 900; color: #ff9f43; font-style: italic; }
-        .balance-container { 
-            display: flex; 
-            align-items: center; 
-            background: #101115;
-            padding: 4px 12px; 
-            border-radius: 20px; 
-            border: 1px solid #2d303a; 
-        }
-        .balance-label { font-size: 13px; color: #2ccb4a; font-weight: 900; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { margin: 0; background-color: #0e0f12; color: #fff; display: flex; flex-direction: column; align-items: center; }
         
-        /* Game Layout */
-        .game-container {
-            width: 100%;
-            max-width: 385px;
-            padding: 20px 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+        .top-bar { 
+            width: 100%; max-width: 400px; display: flex; justify-content: space-between; 
+            align-items: center; padding: 15px; background: #16171e; border-bottom: 2px solid #1f2029;
         }
-        .grid-container {
-            width: 100%;
-            background: #1b1c21;
-            padding: 12px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            border: 1px solid #2d303a;
-        }
-        .road-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            padding: 4px;
-            border-radius: 8px;
-            opacity: 0.4;
-            transition: all 0.3s ease;
-        }
-        .road-row.active-row {
-            opacity: 1;
-            background: rgba(255, 159, 67, 0.05);
-            border: 1px dashed #ff9f43;
-        }
-        .tile {
-            height: 55px;
-            background: #252730;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            border-bottom: 3px solid #141519;
-            transition: transform 0.1s;
-        }
-        .road-row.active-row .tile:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 12px rgba(255, 159, 67, 0.5);
-        }
+        .logo { font-size: 20px; font-weight: 900; color: #ff9f43; font-style: italic; }
         
-        /* Reveal Animations */
-        @keyframes popReveal {
-            0% { transform: scale(0.5); opacity: 0; }
-            70% { transform: scale(1.15); opacity: 1; }
-            100% { transform: scale(1); }
+        .menu-container { width: 100%; max-width: 400px; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+        .welcome-msg { font-size: 16px; color: #a0a5b5; font-weight: bold; margin-bottom: 5px; }
+        
+        /* Game Card Style */
+        .game-card {
+            background: #16171e; border: 1px solid #2d303f; border-radius: 12px; padding: 15px;
+            display: flex; align-items: center; justify-content: space-between; text-decoration: none;
+            color: #fff; transition: all 0.2s ease; border-bottom: 4px solid #111218;
         }
-        .tile.revealed-chicken, .tile.revealed-egg {
-            animation: popReveal 0.25s ease;
-            background: #2ccb4a;
-            border-bottom-color: #1b8a30;
-        }
-        .tile.revealed-bomb {
-            animation: popReveal 0.25s ease;
-            background: #ff3838;
-            border-bottom-color: #b81d1d;
-        }
-
-        /* Controls */
-        .controls {
-            width: 100%;
-            background: #1b1c21;
-            padding: 15px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            border: 1px solid #2d303a;
-        }
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .input-group label { font-size: 12px; color: #858796; text-transform: uppercase; }
-        .input-group input {
-            background: #101115;
-            border: 1px solid #2d303a;
-            color: #fff;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .bet-button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            background: linear-gradient(180deg, #39d353, #1faa3f);
-            transition: all 0.2s;
-        }
-        .bet-button.cashout {
-            background: linear-gradient(180deg, #ffb357, #ff8c1a);
-            box-shadow: 0 4px 12px rgba(255, 159, 67, 0.35);
-        }
-        .status-display {
-            width: 100%;
-            text-align: center;
-            font-size: 14px;
-            color: #ff9f43;
-            font-weight: bold;
-            min-height: 20px;
+        .game-card:active { transform: scale(0.97); }
+        .game-info { display: flex; align-items: center; gap: 15px; }
+        .game-icon { font-size: 32px; background: #21232b; padding: 10px; border-radius: 10px; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; }
+        .game-details h3 { margin: 0; font-size: 16px; font-weight: 900; color: #fff; }
+        .game-details p { margin: 4px 0 0 0; font-size: 12px; color: #7c8091; }
+        
+        .play-btn {
+            background: linear-gradient(180deg, #ff9f43, #d97714); color: #fff; border: none;
+            padding: 8px 16px; border-radius: 6px; font-weight: bold; font-size: 13px;
         }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
-        <div class="logo">Kalgames</div>
-        <div class="balance-container">
-            <div class="balance-label" id="player-balance">100.00 ETB</div>
-        </div>
+        <span class="logo">🎮 Kalgames</span>
     </div>
 
-    <div class="game-container">
-        <div class="status-display" id="sub-txt">ለመጫወት ውርርድ ያስገቡ</div>
-        
-        <div class="grid-container" id="grid">
-            </div>
+    <div class="menu-container">
+        <div class="welcome-msg">የሚጫወቱትን ጨዋታ ይምረጡ፦</div>
 
-        <div class="controls">
-            <div class="input-group">
-                <label>የውርርድ መጠን (ETB)</label>
-                <input type="number" id="bet-amount" value="10" min="1">
+        <a href="chicken.html" class="game-card">
+            <div class="game-info">
+                <div class="game-icon">🐔</div>
+                <div class="game-details">
+                    <h3>Chicken Road</h3>
+                    <p>ዶሮዋን ከቦምብ አድነህ አሻግር!</p>
+                </div>
             </div>
-            <button class="bet-button" id="action-btn" onclick="handleMainAction()">ጨዋታ ጀምር</button>
-        </div>
+            <button class="play-btn">PLAY</button>
+        </a>
+
+        <a href="keno.html" class="game-card">
+            <div class="game-info">
+                <div class="game-icon">🔢</div>
+                <div class="game-details">
+                    <h3>Keno Game</h3>
+                    <p>እድለኛ ቁጥሮችዎን ይምረጡ!</p>
+                </div>
+            </div>
+            <button class="play-btn">PLAY</button>
+        </a>
+
+        <a href="zingo.html" class="game-card">
+            <div class="game-info">
+                <div class="game-icon">🎡</div>
+                <div class="game-details">
+                    <h3>Zingo Slot</h3>
+                    <p>ዕድልዎን በዚንጎ ይሞክሩ!</p>
+                </div>
+            </div>
+            <button class="play-btn">PLAY</button>
+        </a>
     </div>
 
-    <script>
-        let balance = 100.00;
-        let betAmount = 10;
-        let currentMultiplier = 1.00;
-        let currentStep = -1; 
-        let isGameActive = false;
-        const totalRows = 5;
-        let bombPositions = [];
-
-        // Load balance from localStorage on startup
-        let savedBalance = localStorage.getItem("chickenBalance");
-        if(savedBalance){
-            balance = parseFloat(savedBalance);
-            updateBalanceDisplay();
-        }
-
-        // Real-time input listener for bet amount
-        document.getElementById('bet-amount').addEventListener('input', function () {
-            let value = parseInt(this.value) || 1;
-            if (value < 1) value = 1;
-            betAmount = value;
-            this.value = value;
-            
-            if (!isGameActive) {
-                document.getElementById('sub-txt').innerText = betAmount.toFixed(2) + " ETB ለመወራረድ ተዘጋጅቷል";
-            }
-        });
-
-        function updateBalanceDisplay() {
-            document.getElementById('player-balance').innerText = balance.toFixed(2) + " ETB";
-        }
-
-        function createGrid() {
-            const grid = document.getElementById('grid');
-            grid.innerHTML = '';
-            for (let r = totalRows - 1; r >= 0; r--) {
-                const rowDiv = document.createElement('div');
-                rowDiv.className = 'road-row';
-                rowDiv.id = `row-${r}`;
-                
-                for (let t = 0; t < 3; t++) {
-                    const tileDiv = document.createElement('div');
-                    tileDiv.className = 'tile';
-                    tileDiv.innerText = '❓';
-                    tileDiv.setAttribute('onclick', `makeMove(${r}, ${t})`);
-                    rowDiv.appendChild(tileDiv);
-                }
-                grid.appendChild(rowDiv);
-            }
-        }
-
-        function activateRow(rowId) {
-            for (let i = 0; i < totalRows; i++) {
-                const row = document.getElementById(`row-${i}`);
-                if (row) row.classList.remove('active-row');
-            }
-            if (rowId >= 0 && rowId < totalRows) {
-                const activeRow = document.getElementById(`row-${rowId}`);
-                if (activeRow) activeRow.classList.add('active-row');
-            }
-        }
-
-        function handleMainAction() {
-            if (!isGameActive) {
-                if (balance < betAmount) {
-                    alert("በቂ ቀሪ ሂሳብ የሎትም!");
-                    return;
-                }
-                // Start Game
-                balance -= betAmount;
-                localStorage.setItem("chickenBalance", balance);
-                updateBalanceDisplay();
-                isGameActive = true;
-                currentStep = 0;
-                currentMultiplier = 1.20;
-                
-                // Generate secret bomb layout (1 bomb per row)
-                bombPositions = [];
-                for (let i = 0; i < totalRows; i++) {
-                    bombPositions.push(Math.floor(Math.random() * 3));
-                }
-
-                createGrid();
-                activateRow(currentStep);
-                
-                const btn = document.getElementById('action-btn');
-                btn.innerText = `CASH OUT (${(betAmount * currentMultiplier).toFixed(2)} ETB)`;
-                btn.className = "bet-button cashout";
-                document.getElementById('sub-txt').innerText = "ደረጃ 1፡ በጥንቃቄ ይምረጡ...";
-            } else {
-                // Cash Out
-                let winAmt = betAmount * currentMultiplier;
-                balance += winAmt;
-                localStorage.setItem("chickenBalance", balance);
-                updateBalanceDisplay();
-                alert(`ድንቅ ነው! ሙሉ መንገዱን አጠናቀው ${winAmt.toFixed(2)} ETB አሸነፉ! 🏆`);
-                endGameSession();
-            }
-        }
-
-        function makeMove(rowId, tileId) {
-            if (!isGameActive || rowId !== currentStep) return;
-
-            const rowElement = document.getElementById(`row-${rowId}`);
-            const selectedTile = rowElement.children[tileId];
-
-            if (tileId === bombPositions[rowId]) {
-                // Hit Bomb
-                selectedTile.className = "tile revealed-bomb";
-                selectedTile.innerText = "💣";
-                document.getElementById('sub-txt').innerText = "💥 ቦምብ አግኝተዋል! ተሸንፈዋል!";
-                setTimeout(() => {
-                    alert("ኦህ! ቦምብ ረግጠዋል። እንደገና ይሞክሩ!");
-                    endGameSession();
-                }, 300);
-            } else {
-                // Safe - Chicken Revealed
-                selectedTile.className = "tile revealed-chicken";
-                selectedTile.innerText = "🐥";
-
-                if (currentStep === totalRows - 1) {
-                    // Reached the end
-                    let winAmt = betAmount * currentMultiplier * 1.5; // Final bonus
-                    balance += winAmt;
-                    localStorage.setItem("chickenBalance", balance);
-                    updateBalanceDisplay();
-                    alert(`እንኳን ደስ አሎት! ሙሉ መንገዱን አጠናቀው ${winAmt.toFixed(2)} ETB አሸነፉ! 🏆`);
-                    endGameSession();
-                } else {
-                    // Advance to next row
-                    currentStep++;
-                    currentMultiplier = parseFloat((currentMultiplier * 1.4).toFixed(2));
-                    activateRow(currentStep);
-                    
-                    const btn = document.getElementById('action-btn');
-                    btn.innerText = `CASH OUT (${(betAmount * currentMultiplier).toFixed(2)} ETB)`;
-                    document.getElementById('sub-txt').innerText = `ደረጃ ${currentStep + 1}፡ ቀጣዩን ይምረጡ...`;
-                }
-            }
-        }
-
-        function endGameSession() {
-            isGameActive = false;
-            currentStep = -1;
-            activateRow(-1);
-            
-            const btn = document.getElementById('action-btn');
-            btn.innerText = "ጨዋታ ጀምር";
-            btn.className = "bet-button";
-            document.getElementById('sub-txt').innerText = "ለመጫወት ውርርድ ያስገቡ";
-        }
-
-        // Initialize grid on load
-        createGrid();
-    </script>
 </body>
 </html>
