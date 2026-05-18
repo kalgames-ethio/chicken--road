@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalgames - Chicken Road Premium</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background-color: #101115; color: #fff; font-family: 'Roboto', sans-serif; display: flex; flex-direction: column; align-items: center; -webkit-user-select: none; user-select: none; }
+        .top-bar { width: 100%; max-width: 385px; display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: #1b1c21; border-bottom: 2px solid #141519; }
+        .logo { font-size: 18px; font-weight: 900; color: #ff9f43; font-style: italic; }
+        .balance-container { display: flex; align-items: center; background: #101115; padding: 4px 12px; border-radius: 20px; border: 1px solid #2d303a; }
+        .balance-label { font-size: 13px; color: #2ccb4a; font-weight: 900; }
+        .status-display { width: 96%; max-width: 370px; background: #141519; margin-top: 8px; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold; border: 1px solid #1c1d22; }
+        .current-payout { color: #ff9f43; font-size: 18px; font-weight: 900; }
+        .grid-container { width: 96%; max-width: 370px; background: #141519; margin-top: 8px; border-radius: 12px; padding: 12px; border: 1px solid #232429; display: flex; flex-direction: column; gap: 8px; }
+        .road-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 4px; border-radius: 8px; background: rgba(255,255,255,0.02); }
+        .road-row.active-row { background: rgba(255, 159, 67, 0.08); border: 1px dashed #ff9f43; }
+        .tile { height: 55px; background: #232429; border: 1px solid #2d303a; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: not-allowed; transition: all 0.2s ease; position: relative; }
+        .road-row.active-row .tile { cursor: pointer; background: #2c2d34; border-color: #40434f; }
+        .road-row.active-row .tile:hover { background: #353740; border-color: #ff9f43; }
+        .tile.revealed-chicken { background: rgba(44, 203, 74, 0.2) !important; border-color: #2ccb4a !important; }
+        .tile.revealed-egg { background: rgba(203, 1, 48, 0.2) !important; border-color: #cb0130 !important; }
+        .step-badge { font-size: 10px; color: #757881; margin-bottom: 2px; padding-left: 4px; font-weight: bold; }
+        .bet-area { width: 96%; max-width: 370px; margin-top: 10px; }
+        .bet-panel { background: #1b1c21; padding: 12px; border-radius: 12px; border: 1px solid #232429; }
+        .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .controls-left { display: flex; flex-direction: column; gap: 6px; }
+        .amount-control-wrapper { display: flex; align-items: center; justify-content: space-between; background: #101115; border-radius: 20px; border: 1px solid #2d303a; padding: 2px 8px; height: 36px; }
+        .minus-btn, .plus-btn { background: none; border: none; color: #fff; width: 24px; height: 24px; font-size: 18px; font-weight: bold; cursor: pointer; }
+        .amount-input { background: none; border: none; color: #fff; font-size: 14px; font-weight: bold; width: 60px; text-align: center; outline: none; }
+        .amount-input::-webkit-inner-spin-button, .amount-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        .quick-chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+        .chip-btn { background: #141519; border: 1px solid #2d303a; color: #fff; padding: 6px 0; font-size: 12px; font-weight: 900; border-radius: 6px; cursor: pointer; }
+        .bet-button { background: #2ccb4a; color: #fff; border: none; border-radius: 10px; width: 100%; min-height: 66px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(44, 203, 74, 0.25); font-weight: 900; }
+        .btn-main-text { font-size: 18px; letter-spacing: 0.5px; }
+        .btn-sub-text { font-size: 11px; color: rgba(255, 255, 255, 0.85); margin-top: 1px; }
+        .bet-button.cashout { background: #ff9f43; box-shadow: 0 4px 12px rgba(255, 159, 67, 0.25); }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <span class="logo">Chicken Road</span>
+        <div class="balance-container"><span class="balance-label" id="player-balance">1,000.00 ETB</span></div>
+    </div>
+    <div class="status-display" id="status-box">
+        <span style="color: #9a9da4; font-size: 12px;">Next Step Multiplier</span>
+        <div class="current-payout" id="next-multiplier-text">1.45x</div>
+    </div>
+    <div class="grid-container" id="grid-container-id">
+        <div><div class="step-badge">STEP 5 (Multiplier: 4.20x)</div><div class="road-row" id="row-4"><div class="tile" onclick="makeMove(4, 0)"></div><div class="tile" onclick="makeMove(4, 1)"></div><div class="tile" onclick="makeMove(4, 2)"></div></div></div>
+        <div><div class="step-badge">STEP 4 (Multiplier: 3.10x)</div><div class="road-row" id="row-3"><div class="tile" onclick="makeMove(3, 0)"></div><div class="tile" onclick="makeMove(3, 1)"></div><div class="tile" onclick="makeMove(3, 2)"></div></div></div>
+        <div><div class="step-badge">STEP 3 (Multiplier: 2.30x)</div><div class="road-row" id="row-2"><div class="tile" onclick="makeMove(2, 0)"></div><div class="tile" onclick="makeMove(2, 1)"></div><div class="tile" onclick="makeMove(2, 2)"></div></div></div>
+        <div><div class="step-badge">STEP 2 (Multiplier: 1.80x)</div><div class="road-row" id="row-1"><div class="tile" onclick="makeMove(1, 0)"></div><div class="tile" onclick="makeMove(1, 1)"></div><div class="tile" onclick="makeMove(1, 2)"></div></div></div>
+        <div><div class="step-badge">STEP 1 (Multiplier: 1.45x)</div><div class="road-row" id="row-0"><div class="tile" onclick="makeMove(0, 0)"></div><div class="tile" onclick="makeMove(0, 1)"></div><div class="tile" onclick="makeMove(0, 2)"></div></div></div>
+    </div>
+    <div class="bet-area">
+        <div class="bet-panel">
+            <div class="panel-grid">
+                <div class="controls-left">
+                    <div class="amount-control-wrapper">
+                        <button class="minus-btn" onclick="adjustAmount(-1)">-</button>
+                        <input type="number" class="amount-input" id="bet-amount" value="4">
+                        <button class="plus-btn" onclick="adjustAmount(1)">+</button>
+                    </div>
+                    <div class="quick-chips">
+                        <button class="chip-btn" onclick="setAmount(4)">4</button>
+                        <button class="chip-btn" onclick="setAmount(10)">10</button>
+                        <button class="chip-btn" onclick="setAmount(40)">40</button>
+                        <button class="chip-btn" onclick="setAmount(100)">100</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="bet-button" id="action-btn" onclick="handleMainAction()">
+                        <div class="btn-main-text" id="main-txt">START GAME</div>
+                        <div class="btn-sub-text" id="sub-txt">4.00 ETB</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let balance = 1000.00; let isGameActive = false; let currentStep = 0; let betAmount = 4; let currentMultiplier = 1.00;
+        const rowMultipliers = [1.45, 1.80, 2.30, 3.10, 4.20]; let secretRoadMap = [];
+        function adjustAmount(val) { if (isGameActive) return; let input = document.getElementById('bet-amount'); let current = parseInt(input.value) || 0; if (current + val >= 1) { input.value = current + val; betAmount = current + val; document.getElementById('sub-txt').innerText = betAmount.toFixed(2) + " ETB"; } }
+        function setAmount(val) { if (isGameActive) return; document.getElementById('bet-amount').value = val; betAmount = val; document.getElementById('sub-txt').innerText = betAmount.toFixed(2) + " ETB"; }
+        function handleMainAction() {
+            if (!isGameActive) {
+                if (balance < betAmount) { alert("በቂ ባላንስ የሎትም!"); return; }
+                balance -= betAmount; document.getElementById('player-balance').innerText = balance.toFixed(2) + " ETB";
+                isGameActive = true; currentStep = 0; currentMultiplier = 1.00; secretRoadMap = [];
+                for(let i=0; i<5; i++) { secretRoadMap.push(Math.floor(Math.random() * 3)); }
+                resetGridVisuals(); activateRow(0);
+                document.getElementById('main-txt').innerText = "CASH OUT"; document.getElementById('sub-txt').innerText = "0.00 ETB";
+                document.getElementById('action-btn').className = "bet-button cashout"; document.getElementById('next-multiplier-text').innerText = rowMultipliers[0].toFixed(2) + "x";
+            } else {
+                if (currentStep > 0) { let winAmt = betAmount * currentMultiplier; balance += winAmt; document.getElementById('player-balance').innerText = balance.toFixed(2) + " ETB"; alert(`እንኳን ደስ አሰኞት! ${winAmt.toFixed(2)} ETB አሸንፈዋል! 🎉`); }
+                endGameSession();
+            }
+        }
+        function activateRow(rowId) { for(let i=0; i<5; i++) { document.getElementById('row-' + i).classList.remove('active-row'); } if (rowId < 5) { document.getElementById('row-' + rowId).classList.add('active-row'); } }
+        function makeMove(rowId, tileId) {
+            if (!isGameActive || rowId !== currentStep) return;
+            let rowElement = document.getElementById('row-' + rowId); let selectedTile = rowElement.children[tileId];
+            if (tileId === secretRoadMap[rowId]) {
+                selectedTile.innerText = "🥚"; selectedTile.classList.add('revealed-egg'); document.getElementById('next-multiplier-text').innerText = "CRASHED"; alert("ኦህ! ዶሮዋ እንቁላል ረገጠች (ተሸነፉ) 💥"); endGameSession();
+            } else {
+                selectedTile.innerText = "🐔"; selectedTile.classList.add('revealed-chicken');
+                currentMultiplier = rowMultipliers[currentStep]; let currentWin = betAmount * currentMultiplier; document.getElementById('sub-txt').innerText = currentWin.toFixed(2) + " ETB";
+                currentStep++;
+                if (currentStep < 5) { activateRow(currentStep); document.getElementById('next-multiplier-text').innerText = rowMultipliers[currentStep].toFixed(2) + "x"; }
+                else { let winAmt = betAmount * currentMultiplier; balance += winAmt; document.getElementById('player-balance').innerText = balance.toFixed(2) + " ETB"; alert(`ድንቅ ነው! ሙሉ መንገዱን አጠናቀው ${winAmt.toFixed(2)} ETB አሸንፈፉ! 🏆`); endGameSession(); }
+            }
+        }
+        function endGameSession() { isGameActive = false; activateRow(-1); document.getElementById('main-txt').innerText = "START GAME"; document.getElementById('sub-txt').innerText = betAmount.toFixed(2) + " ETB"; document.getElementById('action-btn').className = "bet-button"; document.getElementById('next-multiplier-text').innerText = rowMultipliers[0].toFixed(2) + "x"; }
+        function resetGridVisuals() { for(let r=0; r<5; r++) { let row = document.getElementById('row-' + r); for(let t=0; t<3; t++) { row.children[t].innerText = ""; row.children[t].className = "tile"; } } }
+    </script>
+</body>
+</html>
