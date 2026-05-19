@@ -3,80 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalgames - Game Center</title>
+    <title>KalBet - Premium Game Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { margin: 0; background-color: #0e0f12; color: #fff; display: flex; flex-direction: column; align-items: center; }
-        
-        .top-bar { 
-            width: 100%; max-width: 400px; display: flex; justify-content: space-between; 
-            align-items: center; padding: 15px; background: #16171e; border-bottom: 2px solid #1f2029;
-        }
-        .logo { font-size: 20px; font-weight: 900; color: #ff9f43; font-style: italic; }
-        
-        .menu-container { width: 100%; max-width: 400px; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
-        .welcome-msg { font-size: 16px; color: #a0a5b5; font-weight: bold; margin-bottom: 5px; }
-        
-        /* Game Card Style */
-        .game-card {
-            background: #16171e; border: 1px solid #2d303f; border-radius: 12px; padding: 15px;
-            display: flex; align-items: center; justify-content: space-between; text-decoration: none;
-            color: #fff; transition: all 0.2s ease; border-bottom: 4px solid #111218;
-        }
-        .game-card:active { transform: scale(0.97); }
-        .game-info { display: flex; align-items: center; gap: 15px; }
-        .game-icon { font-size: 32px; background: #21232b; padding: 10px; border-radius: 10px; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; }
-        .game-details h3 { margin: 0; font-size: 16px; font-weight: 900; color: #fff; }
-        .game-details p { margin: 4px 0 0 0; font-size: 12px; color: #7c8091; }
-        
-        .play-btn {
-            background: linear-gradient(180deg, #ff9f43, #d97714); color: #fff; border: none;
-            padding: 8px 16px; border-radius: 6px; font-weight: bold; font-size: 13px;
-        }
+        :root { --bg-dark: #0e0f12; --card-bg: #16171e; --accent-gold: #ffbd14; --accent-green: #2ccb4a; --text-gray: #a3b2c4; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; background-color: var(--bg-dark); color: #fff; overflow-x: hidden; padding-bottom: 80px; }
+
+        /* SPLASH SCREEN */
+        #splash { position: fixed; top:0; left:0; width:100%; height:100%; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.5s; }
+        .splash-logo { width: 70%; max-width: 250px; border-radius: 20px; animation: pulse 2s infinite; }
+        .load-bar { width: 60%; height: 4px; background: #222; border-radius: 10px; margin-top: 25px; overflow: hidden; }
+        .load-prog { width: 100%; height: 100%; background: var(--accent-gold); position: absolute; left: -100%; animation: load 2.5s forwards; }
+        @keyframes load { 100% { left: 0; } } @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+        /* TOP BAR */
+        .header { position: sticky; top:0; background: var(--card-bg); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 100; border-bottom: 1px solid #2d3b4f; }
+        .wallet-pill { background: #21232b; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 8px; border: 1px solid #2d3b4f; }
+        .currency-icon { background: #0088cc; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
+        .balance-val { font-weight: 900; color: #fff; font-size: 15px; }
+        .btn-deposit { background: var(--accent-green); color: #000; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 900; font-size: 13px; cursor: pointer; }
+
+        /* PROMO BANNER */
+        .banner { margin: 15px; background: linear-gradient(135deg, #2b384b, #16171e); border-radius: 16px; padding: 20px; position: relative; border: 1px solid #2d3b4f; overflow: hidden; }
+        .banner h2 { margin: 0; font-size: 20px; color: var(--accent-gold); }
+        .banner p { margin: 5px 0 0 0; color: var(--text-gray); font-size: 12px; font-weight: bold; }
+        .banner-icon { position: absolute; right: -10px; top: -10px; font-size: 80px; opacity: 0.2; transform: rotate(-20deg); }
+
+        /* QUICK ACTIONS */
+        .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 15px; }
+        .q-item { background: var(--card-bg); border-radius: 12px; padding: 12px 5px; display: flex; flex-direction: column; align-items: center; gap: 6px; border: 1px solid #2d3b4f; text-decoration: none; }
+        .q-icon { font-size: 22px; }
+        .q-label { font-size: 10px; color: var(--text-gray); font-weight: bold; text-align: center; }
+
+        /* GAME LIST */
+        .section-header { padding: 20px 15px 10px; font-size: 14px; font-weight: bold; color: var(--text-gray); }
+        .game-list { background: var(--card-bg); margin: 0 15px; border-radius: 16px; border: 1px solid #2d3b4f; }
+        .game-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; border-bottom: 1px solid #2d3b4f; text-decoration: none; }
+        .game-info { display: flex; align-items: center; gap: 12px; }
+        .game-img { width: 48px; height: 48px; background: #2a3749; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; position: relative; }
+        .new-tag { position: absolute; top: -5px; right: -5px; background: var(--accent-gold); color: #000; font-size: 8px; font-weight: 900; padding: 2px 4px; border-radius: 4px; }
+        .game-name { font-size: 15px; font-weight: bold; color: #fff; }
+        .play-row-btn { background: var(--accent-gold); color: #000; border: none; padding: 6px 15px; border-radius: 15px; font-weight: 900; font-size: 11px; }
+
+        /* WALLET MODAL (DEPOSIT/WITHDRAW) */
+        .modal { position: fixed; bottom: -100%; left: 0; width: 100%; height: 90%; background: var(--bg-dark); z-index: 1000; border-radius: 20px 20px 0 0; padding: 20px; transition: 0.4s; border-top: 2px solid var(--accent-gold); }
+        .modal.active { bottom: 0; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: bold; }
+        .input-group input { width: 100%; background: #1a1b22; border: 1px solid #2d3b4f; padding: 12px; border-radius: 8px; color: #fff; outline: none; font-size: 16px; }
+        .btn-confirm { width: 100%; background: var(--accent-green); color: #000; border: none; padding: 14px; border-radius: 10px; font-weight: 900; font-size: 15px; cursor: pointer; margin-top: 10px; }
+        .limit-info { font-size: 11px; color: #ff3b3b; margin-top: 5px; font-weight: bold; }
+
+        /* BOTTOM NAV */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #1a1b22; display: flex; justify-content: space-around; padding: 10px 0 25px; border-top: 1px solid #2d3b4f; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-gray); text-decoration: none; font-size: 10px; font-weight: bold; }
+        .nav-item.active { color: var(--accent-gold); }
+        .nav-item i { font-size: 20px; }
+        .trophy-center { position: relative; top: -20px; background: var(--bg-dark); border: 4px solid var(--accent-gold); width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255,189,20,0.3); }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <span class="logo">🎮 Kalgames</span>
+    <div id="splash">
+        <img src="1000002633.png" class="splash-logo">
+        <div class="load-bar"><div class="load-prog"></div></div>
     </div>
 
-    <div class="menu-container">
-        <div class="welcome-msg">የሚጫወቱትን ጨዋታ ይምረጡ፦</div>
-
-        <a href="chicken.html" class="game-card">
-            <div class="game-info">
-                <div class="game-icon">🐔</div>
-                <div class="game-details">
-                    <h3>Chicken Road</h3>
-                    <p>ዶሮዋን ከቦምብ አድነህ አሻግር!</p>
-                </div>
+    <div class="header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="1000002633.png" width="30" style="border-radius: 5px;">
+            <span style="font-weight: 900; font-style: italic; color: var(--accent-gold);">KALBET</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="wallet-pill">
+                <div class="currency-icon">Br</div>
+                <span class="balance-val" id="main-balance">0.00</span>
             </div>
-            <button class="play-btn">PLAY</button>
+            <button class="btn-deposit" onclick="openWallet('deposit')"><i class="fa-solid fa-plus"></i> አስገባ</button>
+        </div>
+    </div>
+
+    <div class="banner">
+        <h2>CRYPTO SPIN</h2>
+        <p>SPIN FOR UNLIMITED BONUS</p>
+        <i class="fa-solid fa-dharmachakra banner-icon"></i>
+    </div>
+
+    <div class="quick-grid">
+        <a href="#" class="q-item"><span class="q-icon">🎡</span><span class="q-label">ዕድለኛ ስፒን</span></a>
+        <a href="#" class="q-item"><span class="q-icon">🪙</span><span class="q-label">ሻሞ ኮይን</span></a>
+        <a href="#" class="q-item"><span class="q-icon">🎟️</span><span class="q-label">ኩፖን</span></a>
+        <a href="#" class="q-item"><span class="q-icon">👑</span><span class="q-label">VIP ደረጃ</span></a>
+    </div>
+
+    <div class="section-header">የተመረጡ ጨዋታዎች</div>
+    <div class="game-list">
+        <a href="aviator.html" class="game-row">
+            <div class="game-info">
+                <div class="game-img">🚀</div>
+                <span class="game-name">Aviator</span>
+            </div>
+            <button class="play-row-btn">ተጫወት</button>
         </a>
-
-        <a href="keno.html" class="game-card">
+        <a href="chicken.html" class="game-row">
             <div class="game-info">
-                <div class="game-icon">🔢</div>
-                <div class="game-details">
-                    <h3>Keno Game</h3>
-                    <p>እድለኛ ቁጥሮችዎን ይምረጡ!</p>
-                </div>
+                <div class="game-img">🐔</div>
+                <span class="game-name">Chicken Road</span>
             </div>
-            <button class="play-btn">PLAY</button>
+            <button class="play-row-btn">ተጫወት</button>
         </a>
-
-        <a href="zingo.html" class="game-card">
+        <a href="chicken_roast.html" class="game-row">
             <div class="game-info">
-                <div class="game-icon">🎡</div>
-                <div class="game-details">
-                    <h3>Zingo Slot</h3>
-                    <p>ዕድልዎን በዚንጎ ይሞክሩ!</p>
-                </div>
+                <div class="game-img">🍗<span class="new-tag">አዲስ</span></div>
+                <span class="game-name">Chicken Roast</span>
             </div>
-            <button class="play-btn">PLAY</button>
+            <button class="play-row-btn">ተጫወት</button>
+        </a>
+        <a href="mines.html" class="game-row">
+            <div class="game-info">
+                <div class="game-img">💎</div>
+                <span class="game-name">Mine Gems</span>
+            </div>
+            <button class="play-row-btn">ተጫወት</button>
         </a>
     </div>
 
+    <div id="wallet-modal" class="modal">
+        <div class="modal-header">
+            <h3 id="modal-title" style="margin:0;">ገንዘብ አስገባ</h3>
+            <i class="fa-solid fa-times" style="font-size: 24px; cursor: pointer;" onclick="closeWallet()"></i>
+        </div>
+        <div id="deposit-fields">
+            <div class="input-group">
+                <label>የብር መጠን (ዝቅተኛው 50 ብር)</label>
+                <input type="number" id="dep-amount" placeholder="0.00">
+                <div class="limit-info" id="dep-error"></div>
+            </div>
+            <div class="input-group">
+                <label>የክፍያ ማረጋገጫ (Transaction Link / ደረሰኝ ቁጥር)</label>
+                <input type="text" id="proof-link" placeholder="ሊንኩን እዚህ ያስገቡ">
+            </div>
+            <button class="btn-confirm" onclick="processDeposit()">ማስረጃውን ላክ</button>
+        </div>
+        <div id="withdraw-fields" style="display:none;">
+            <div class="input-group">
+                <label>የማውጫ መጠን (ዝቅተኛው 300 ብር)</label>
+                <input type="number" id="with-amount" placeholder="0.00">
+                <div class="limit-info" id="with-error"></div>
+            </div>
+            <div class="input-group">
+                <label>የቴሌብር ስልክ ቁጥር</label>
+                <input type="number" id="phone-num" placeholder="09...">
+            </div>
+            <button class="btn-confirm" onclick="processWithdraw()">ብር አውጣ</button>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-item"><i class="fa-solid fa-gift"></i><span>ተጨማሪ</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-users"></i><span>ጋብዝ</span></a>
+        <a href="#" class="nav-item active">
+            <div class="trophy-center"><span>🏆</span></div>
+            <span style="position:relative; top:-5px;">ጨዋታዎች</span>
+        </a>
+        <a href="#" class="nav-item" onclick="openWallet('withdraw')"><i class="fa-solid fa-wallet"></i><span>ዋሌት</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-user"></i><span>መገለጫ</span></a>
+    </div>
+
+    <script>
+        let balance = 0.00;
+        if(localStorage.getItem('kb_balance')) { balance = parseFloat(localStorage.getItem('kb_balance')); }
+        function updateUI() { document.getElementById('main-balance').innerText = balance.toFixed(2); localStorage.setItem('kb_balance', balance); }
+
+        // SPLASH
+        window.onload = () => { setTimeout(() => { document.getElementById('splash').style.opacity = '0'; setTimeout(()=>document.getElementById('splash').style.display='none', 500); }, 2500); updateUI(); }
+
+        // WALLET LOGIC
+        function openWallet(mode) {
+            const modal = document.getElementById('wallet-modal');
+            const title = document.getElementById('modal-title');
+            modal.classList.add('active');
+            if(mode === 'deposit') {
+                title.innerText = "ገንዘብ አስገባ";
+                document.getElementById('deposit-fields').style.display = 'block';
+                document.getElementById('withdraw-fields').style.display = 'none';
+            } else {
+                title.innerText = "ገንዘብ አውጣ";
+                document.getElementById('deposit-fields').style.display = 'none';
+                document.getElementById('withdraw-fields').style.display = 'block';
+            }
+        }
+        function closeWallet() { document.getElementById('wallet-modal').classList.remove('active'); }
+
+        function processDeposit() {
+            const amt = parseFloat(document.getElementById('dep-amount').value);
+            const proof = document.getElementById('proof-link').value;
+            if(amt < 50 || isNaN(amt)) { document.getElementById('dep-error').innerText = "⚠️ ስህተት፡ ዝቅተኛው ማስገቢያ 50 ብር ነው!"; return; }
+            if(!proof) { alert("እባክዎን የላኩበትን ማስረጃ ሊንክ ያስገቡ!"); return; }
+            alert("✅ ማስረጃው ለ Admin ተልኳል። ትክክለኛነቱ ሲረጋገጥ በ 10 ደቂቃ ውስጥ ባላንስዎ ላይ ይጨመራል!");
+            closeWallet();
+        }
+
+        function processWithdraw() {
+            const amt = parseFloat(document.getElementById('with-amount').value);
+            const phone = document.getElementById('phone-num').value;
+            if(amt < 300 || isNaN(amt)) { document.getElementById('with-error').innerText = "⚠️ ስህተት፡ ዝቅተኛው ማውጫ 300 ብር ነው!"; return; }
+            if(amt > balance) { alert("በቂ ባላንስ የሎትም!"); return; }
+            if(phone.length < 10) { alert("ትክክለኛ የቴሌብር ስልክ ቁጥር ያስገቡ!"); return; }
+            balance -= amt; updateUI();
+            alert("✅ ጥያቄዎ በተሳካ ሁኔታ ቀርቧል። በቅርብ ሰዓት ውስጥ ይላክላችኋል!");
+            closeWallet();
+        }
+    </script>
 </body>
 </html>
