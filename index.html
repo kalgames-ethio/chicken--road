@@ -3,65 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KalBet - Premium Game Center</title>
+    <title>KalBet - Premium Casino Grid</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --bg-dark: #0e0f12; --card-bg: #16171e; --accent-gold: #ffbd14; --accent-green: #2ccb4a; --text-gray: #a3b2c4; }
+        :root { 
+            --bg-dark: #090c10; 
+            --card-bg: #12171e; 
+            --border-color: #1c2530;
+            --accent-gold: #ffbd14; 
+            --accent-green: #00e676; 
+            --text-gray: #788c9f; 
+        }
         * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; background-color: var(--bg-dark); color: #fff; overflow-x: hidden; padding-bottom: 80px; }
+        body { margin: 0; background-color: var(--bg-dark); color: #fff; padding-bottom: 90px; overflow-x: hidden; }
 
-        /* SPLASH SCREEN */
-        #splash { position: fixed; top:0; left:0; width:100%; height:100%; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.5s; }
-        .splash-logo { width: 70%; max-width: 250px; border-radius: 20px; animation: pulse 2s infinite; }
-        .load-bar { width: 60%; height: 4px; background: #222; border-radius: 10px; margin-top: 25px; overflow: hidden; }
-        .load-prog { width: 100%; height: 100%; background: var(--accent-gold); position: absolute; left: -100%; animation: load 2.5s forwards; }
-        @keyframes load { 100% { left: 0; } } @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        /* 1. SPLASH SCREEN */
+        #splash { position: fixed; top:0; left:0; width:100%; height:100%; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.4s ease; }
+        .splash-logo { width: 65%; max-width: 220px; border-radius: 20px; animation: pulse 2s infinite; }
+        .load-bar { width: 50%; height: 4px; background: #1a1a1a; border-radius: 10px; margin-top: 20px; overflow: hidden; position: relative; }
+        .load-prog { width: 100%; height: 100%; background: linear-gradient(90deg, var(--accent-gold), var(--accent-green)); position: absolute; left: -100%; animation: load 2.3s forwards cubic-bezier(0.1, 0.6, 0.4, 1); }
+        @keyframes load { 100% { left: 0; } } @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
 
-        /* TOP BAR */
-        .header { position: sticky; top:0; background: var(--card-bg); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 100; border-bottom: 1px solid #2d3b4f; }
-        .wallet-pill { background: #21232b; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 8px; border: 1px solid #2d3b4f; }
-        .currency-icon { background: #0088cc; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
-        .balance-val { font-weight: 900; color: #fff; font-size: 15px; }
-        .btn-deposit { background: var(--accent-green); color: #000; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 900; font-size: 13px; cursor: pointer; }
+        /* 2. TOP HEADER (የላይኛው ክፍል) */
+        .header { position: sticky; top:0; background: #12171e; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .brand-logo { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--accent-gold); }
+        .brand-text { font-weight: 900; font-size: 18px; color: var(--accent-gold); font-style: italic; letter-spacing: 0.5px; }
+        
+        .header-right { display: flex; align-items: center; gap: 8px; }
+        .wallet-pill { background: #090c10; padding: 5px 10px; border-radius: 30px; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border-color); }
+        .currency-icon { background: #0088cc; color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
+        .balance-val { font-weight: 800; color: #fff; font-size: 14px; }
+        .btn-deposit { background: var(--accent-green); color: #000; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 900; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px; }
 
-        /* PROMO BANNER */
-        .banner { margin: 15px; background: linear-gradient(135deg, #2b384b, #16171e); border-radius: 16px; padding: 20px; position: relative; border: 1px solid #2d3b4f; overflow: hidden; }
-        .banner h2 { margin: 0; font-size: 20px; color: var(--accent-gold); }
-        .banner p { margin: 5px 0 0 0; color: var(--text-gray); font-size: 12px; font-weight: bold; }
-        .banner-icon { position: absolute; right: -10px; top: -10px; font-size: 80px; opacity: 0.2; transform: rotate(-20deg); }
+        /* 3. CASSA BANNER */
+        .banner { margin: 12px; background: linear-gradient(135deg, #1d2633, #12171e); border-radius: 14px; padding: 16px; position: relative; border: 1px solid var(--border-color); overflow: hidden; }
+        .banner h2 { margin: 0; font-size: 18px; color: #fff; font-weight: 900; letter-spacing: 0.5px; }
+        .banner p { margin: 4px 0 0 0; color: var(--text-gray); font-size: 11px; font-weight: bold; }
+        .banner-icon { position: absolute; right: -5px; top: -5px; font-size: 70px; color: var(--accent-gold); opacity: 0.15; transform: rotate(-15deg); }
 
-        /* QUICK ACTIONS */
-        .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 15px; }
-        .q-item { background: var(--card-bg); border-radius: 12px; padding: 12px 5px; display: flex; flex-direction: column; align-items: center; gap: 6px; border: 1px solid #2d3b4f; text-decoration: none; }
-        .q-icon { font-size: 22px; }
+        /* 4. MIDDLE 4 BUTTONS */
+        .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 0 12px; }
+        .q-item { background: var(--card-bg); border-radius: 12px; padding: 10px 4px; display: flex; flex-direction: column; align-items: center; gap: 5px; border: 1px solid var(--border-color); text-decoration: none; transition: transform 0.1s; }
+        .q-item:active { transform: scale(0.95); }
+        .q-icon { font-size: 20px; }
         .q-label { font-size: 10px; color: var(--text-gray); font-weight: bold; text-align: center; }
 
-        /* GAME LIST */
-        .section-header { padding: 20px 15px 10px; font-size: 14px; font-weight: bold; color: var(--text-gray); }
-        .game-list { background: var(--card-bg); margin: 0 15px; border-radius: 16px; border: 1px solid #2d3b4f; }
-        .game-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; border-bottom: 1px solid #2d3b4f; text-decoration: none; }
-        .game-info { display: flex; align-items: center; gap: 12px; }
-        .game-img { width: 48px; height: 48px; background: #2a3749; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; position: relative; }
-        .new-tag { position: absolute; top: -5px; right: -5px; background: var(--accent-gold); color: #000; font-size: 8px; font-weight: 900; padding: 2px 4px; border-radius: 4px; }
-        .game-name { font-size: 15px; font-weight: bold; color: #fff; }
-        .play-row-btn { background: var(--accent-gold); color: #000; border: none; padding: 6px 15px; border-radius: 15px; font-weight: 900; font-size: 11px; }
+        /* 5. 2-COLUMN GAME GRID (ጎን ለጎን 2 ረድፍ አቀማመጥ) */
+        .section-title { padding: 16px 14px 8px; font-size: 13px; font-weight: bold; color: var(--text-gray); letter-spacing: 0.5px; }
+        .game-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 12px; }
+        
+        /* እያንዳንዱ ካርድ ውስጥ ያሉት ነገሮች በተርታ እንዲቀመጡ (Flex) */
+        .game-card { 
+            background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between; padding: 10px 12px;
+            text-decoration: none; color: #fff; transition: background 0.15s;
+        }
+        .game-card:active { background: #19202a; }
+        
+        .game-left { display: flex; align-items: center; gap: 8px; }
+        .game-icon-box { font-size: 20px; width: 34px; height: 34px; background: #1c2530; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .game-name { font-size: 13px; font-weight: bold; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75px; }
+        
+        /* ቢጫው በተን */
+        .play-badge-btn { 
+            background: var(--accent-gold); color: #000; border: none; 
+            padding: 4px 10px; border-radius: 6px; font-weight: 900; font-size: 10px; 
+            box-shadow: 0 2px 6px rgba(255,189,20,0.2);
+        }
 
-        /* WALLET MODAL (DEPOSIT/WITHDRAW) */
-        .modal { position: fixed; bottom: -100%; left: 0; width: 100%; height: 90%; background: var(--bg-dark); z-index: 1000; border-radius: 20px 20px 0 0; padding: 20px; transition: 0.4s; border-top: 2px solid var(--accent-gold); }
+        /* 6. LIVE WINS FEED (የቀጥታ ማሸነፊያ ማሳያ) */
+        .live-feed-box { margin: 15px 12px 0 12px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 10px 14px; }
+        .feed-header { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: bold; color: var(--accent-green); margin-bottom: 8px; }
+        .feed-header .pulse-dot { width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; animation: blink 1s infinite; }
+        .feed-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: bold; color: #fff; }
+        .user-anon { color: var(--text-gray); }
+        .win-amt { color: var(--accent-green); }
+        @keyframes blink { 50% { opacity: 0.3; } }
+
+        /* 7. WALLET SYSTEM MODAL */
+        .modal { position: fixed; bottom: -100%; left: 0; width: 100%; height: 85%; background: var(--bg-dark); z-index: 1000; border-radius: 20px 20px 0 0; padding: 20px; transition: bottom 0.35s cubic-bezier(0.1, 0.6, 0.4, 1); border-top: 2px solid var(--accent-gold); }
         .modal.active { bottom: 0; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
         .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: bold; }
-        .input-group input { width: 100%; background: #1a1b22; border: 1px solid #2d3b4f; padding: 12px; border-radius: 8px; color: #fff; outline: none; font-size: 16px; }
-        .btn-confirm { width: 100%; background: var(--accent-green); color: #000; border: none; padding: 14px; border-radius: 10px; font-weight: 900; font-size: 15px; cursor: pointer; margin-top: 10px; }
-        .limit-info { font-size: 11px; color: #ff3b3b; margin-top: 5px; font-weight: bold; }
+        .input-group label { display: block; font-size: 12px; color: var(--text-gray); margin-bottom: 6px; font-weight: bold; }
+        .input-group input { width: 100%; background: #12171e; border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; color: #fff; outline: none; font-size: 15px; }
+        .btn-confirm { width: 100%; background: var(--accent-green); color: #000; border: none; padding: 12px; border-radius: 8px; font-weight: 900; font-size: 14px; cursor: pointer; margin-top: 5px; }
+        .error-txt { font-size: 11px; color: #ff4444; margin-top: 4px; font-weight: bold; }
 
-        /* BOTTOM NAV */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #1a1b22; display: flex; justify-content: space-around; padding: 10px 0 25px; border-top: 1px solid #2d3b4f; z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-gray); text-decoration: none; font-size: 10px; font-weight: bold; }
+        /* 8. FIXED BOTTOM NAVIGATION */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #12171e; display: flex; justify-content: space-around; padding: 8px 0 20px 0; border-top: 1px solid var(--border-color); z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-gray); text-decoration: none; font-size: 10px; font-weight: bold; width: 20%; }
         .nav-item.active { color: var(--accent-gold); }
-        .nav-item i { font-size: 20px; }
-        .trophy-center { position: relative; top: -20px; background: var(--bg-dark); border: 4px solid var(--accent-gold); width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255,189,20,0.3); }
+        .nav-item i { font-size: 18px; }
     </style>
 </head>
 <body>
@@ -72,11 +106,11 @@
     </div>
 
     <div class="header">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="1000002633.png" width="30" style="border-radius: 5px;">
-            <span style="font-weight: 900; font-style: italic; color: var(--accent-gold);">KALBET</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="#" class="brand">
+            <img src="1000002633.png" class="brand-logo">
+            <span class="brand-text">KalBet</span>
+        </a>
+        <div class="header-right">
             <div class="wallet-pill">
                 <div class="currency-icon">Br</div>
                 <span class="balance-val" id="main-balance">0.00</span>
@@ -98,76 +132,106 @@
         <a href="#" class="q-item"><span class="q-icon">👑</span><span class="q-label">VIP ደረጃ</span></a>
     </div>
 
-    <div class="section-header">የተመረጡ ጨዋታዎች</div>
-    <div class="game-list">
-        <a href="aviator.html" class="game-row">
-            <div class="game-info">
-                <div class="game-img">🚀</div>
+    <div class="section-title">የተመረጡ ጨዋታዎች</div>
+
+    <div class="game-grid">
+        <a href="aviator.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">🚀</div>
                 <span class="game-name">Aviator</span>
             </div>
-            <button class="play-row-btn">ተጫወት</button>
+            <button class="play-badge-btn">PLAY</button>
         </a>
-        <a href="chicken.html" class="game-row">
-            <div class="game-info">
-                <div class="game-img">🐔</div>
-                <span class="game-name">Chicken Road</span>
+
+        <a href="chicken.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">🐔</div>
+                <span class="game-name">Chicken</span>
             </div>
-            <button class="play-row-btn">ተጫወት</button>
+            <button class="play-badge-btn">PLAY</button>
         </a>
-        <a href="chicken_roast.html" class="game-row">
-            <div class="game-info">
-                <div class="game-img">🍗<span class="new-tag">አዲስ</span></div>
-                <span class="game-name">Chicken Roast</span>
+
+        <a href="chicken_roast.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">🍗</div>
+                <span class="game-name">Roast</span>
             </div>
-            <button class="play-row-btn">ተጫወት</button>
+            <button class="play-badge-btn">PLAY</button>
         </a>
-        <a href="mines.html" class="game-row">
-            <div class="game-info">
-                <div class="game-img">💎</div>
-                <span class="game-name">Mine Gems</span>
+
+        <a href="aviamasters.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">🛩️</div>
+                <span class="game-name">Masters</span>
             </div>
-            <button class="play-row-btn">ተጫወት</button>
+            <button class="play-badge-btn">PLAY</button>
         </a>
+
+        <a href="fish_road.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">🐟</div>
+                <span class="game-name">Fish Road</span>
+            </div>
+            <button class="play-badge-btn">PLAY</button>
+        </a>
+
+        <a href="mines.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">💎</div>
+                <span class="game-name">Mines</span>
+            </div>
+            <button class="play-badge-btn">PLAY</button>
+        </a>
+    </div>
+
+    <div class="live-feed-box">
+        <div class="feed-header">
+            <div class="pulse-dot"></div>
+            <span>የቀጥታ አሸናፊዎች ድምፅ</span>
+        </div>
+        <div class="feed-row" id="live-winner-row">
+            <span class="user-anon">s*** sweet...</span>
+            <span class="win-amt">Br 50,000.00</span>
+        </div>
     </div>
 
     <div id="wallet-modal" class="modal">
         <div class="modal-header">
-            <h3 id="modal-title" style="margin:0;">ገንዘብ አስገባ</h3>
-            <i class="fa-solid fa-times" style="font-size: 24px; cursor: pointer;" onclick="closeWallet()"></i>
+            <h3 id="modal-title" style="margin:0; font-size:16px;">ገንዘብ አስገባ</h3>
+            <i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer; color: var(--text-gray);" onclick="closeWallet()"></i>
         </div>
+        
         <div id="deposit-fields">
             <div class="input-group">
                 <label>የብር መጠን (ዝቅተኛው 50 ብር)</label>
                 <input type="number" id="dep-amount" placeholder="0.00">
-                <div class="limit-info" id="dep-error"></div>
+                <div class="error-txt" id="dep-error"></div>
             </div>
             <div class="input-group">
-                <label>የክፍያ ማረጋገጫ (Transaction Link / ደረሰኝ ቁጥር)</label>
-                <input type="text" id="proof-link" placeholder="ሊንኩን እዚህ ያስገቡ">
+                <label>የክፍያ ማረጋገጫ ሊንክ / የደረሰኝ ቁጥር</label>
+                <input type="text" id="proof-link" placeholder="ማስረጃ ሊንክ እዚህ ይለጥፉ">
             </div>
             <button class="btn-confirm" onclick="processDeposit()">ማስረጃውን ላክ</button>
         </div>
+
         <div id="withdraw-fields" style="display:none;">
             <div class="input-group">
                 <label>የማውጫ መጠን (ዝቅተኛው 300 ብር)</label>
                 <input type="number" id="with-amount" placeholder="0.00">
-                <div class="limit-info" id="with-error"></div>
+                <div class="error-txt" id="with-error"></div>
             </div>
             <div class="input-group">
                 <label>የቴሌብር ስልክ ቁጥር</label>
-                <input type="number" id="phone-num" placeholder="09...">
+                <input type="number" id="phone-num" placeholder="09........">
             </div>
             <button class="btn-confirm" onclick="processWithdraw()">ብር አውጣ</button>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <a href="#" class="nav-item"><i class="fa-solid fa-gift"></i><span>ተጨማሪ</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-gift"></i><span>ቦነስ</span></a>
         <a href="#" class="nav-item"><i class="fa-solid fa-users"></i><span>ጋብዝ</span></a>
-        <a href="#" class="nav-item active">
-            <div class="trophy-center"><span>🏆</span></div>
-            <span style="position:relative; top:-5px;">ጨዋታዎች</span>
-        </a>
+        <a href="#" class="nav-item active"><i class="fa-solid fa-gamepad"></i><span>ጨዋታዎች</span></a>
         <a href="#" class="nav-item" onclick="openWallet('withdraw')"><i class="fa-solid fa-wallet"></i><span>ዋሌት</span></a>
         <a href="#" class="nav-item"><i class="fa-solid fa-user"></i><span>መገለጫ</span></a>
     </div>
@@ -177,44 +241,56 @@
         if(localStorage.getItem('kb_balance')) { balance = parseFloat(localStorage.getItem('kb_balance')); }
         function updateUI() { document.getElementById('main-balance').innerText = balance.toFixed(2); localStorage.setItem('kb_balance', balance); }
 
-        // SPLASH
-        window.onload = () => { setTimeout(() => { document.getElementById('splash').style.opacity = '0'; setTimeout(()=>document.getElementById('splash').style.display='none', 500); }, 2500); updateUI(); }
+        // Splash Hiding Screen
+        window.onload = () => { setTimeout(() => { const sp = document.getElementById('splash'); sp.style.opacity = '0'; setTimeout(()=>sp.style.display='none', 400); }, 2300); updateUI(); startLiveFeed(); }
 
-        // WALLET LOGIC
+        // Wallet Window Trigger
         function openWallet(mode) {
-            const modal = document.getElementById('wallet-modal');
-            const title = document.getElementById('modal-title');
-            modal.classList.add('active');
+            document.getElementById('wallet-modal').classList.add('active');
             if(mode === 'deposit') {
-                title.innerText = "ገንዘብ አስገባ";
+                document.getElementById('modal-title').innerText = "ገንዘብ አስገባ";
                 document.getElementById('deposit-fields').style.display = 'block';
                 document.getElementById('withdraw-fields').style.display = 'none';
             } else {
-                title.innerText = "ገንዘብ አውጣ";
+                document.getElementById('modal-title').innerText = "ገንዘብ አውጣ";
                 document.getElementById('deposit-fields').style.display = 'none';
                 document.getElementById('withdraw-fields').style.display = 'block';
             }
         }
         function closeWallet() { document.getElementById('wallet-modal').classList.remove('active'); }
 
+        // Deposit Verification (50 limit)
         function processDeposit() {
             const amt = parseFloat(document.getElementById('dep-amount').value);
             const proof = document.getElementById('proof-link').value;
             if(amt < 50 || isNaN(amt)) { document.getElementById('dep-error').innerText = "⚠️ ስህተት፡ ዝቅተኛው ማስገቢያ 50 ብር ነው!"; return; }
-            if(!proof) { alert("እባክዎን የላኩበትን ማስረጃ ሊንክ ያስገቡ!"); return; }
+            if(!proof) { alert("እባክዎን የላኩበትን ማስረጃ ሊንክ ወይም ደረሰኝ ቁጥር ያስገቡ!"); return; }
+            document.getElementById('dep-error').innerText = "";
             alert("✅ ማስረጃው ለ Admin ተልኳል። ትክክለኛነቱ ሲረጋገጥ በ 10 ደቂቃ ውስጥ ባላንስዎ ላይ ይጨመራል!");
             closeWallet();
         }
 
+        // Withdraw Verification (300 limit)
         function processWithdraw() {
             const amt = parseFloat(document.getElementById('with-amount').value);
             const phone = document.getElementById('phone-num').value;
             if(amt < 300 || isNaN(amt)) { document.getElementById('with-error').innerText = "⚠️ ስህተት፡ ዝቅተኛው ማውጫ 300 ብር ነው!"; return; }
             if(amt > balance) { alert("በቂ ባላንስ የሎትም!"); return; }
-            if(phone.length < 10) { alert("ትክክለኛ የቴሌብር ስልክ ቁጥር ያስገቡ!"); return; }
+            if(phone.length < 10) { alert("እባክዎን ትክክለኛ የቴሌብር ቁጥር ያስገቡ!"); return; }
+            document.getElementById('with-error').innerText = "";
             balance -= amt; updateUI();
-            alert("✅ ጥያቄዎ በተሳካ ሁኔታ ቀርቧል። በቅርብ ሰዓት ውስጥ ይላክላችኋል!");
+            alert("✅ የገንዘብ ማውጫ ጥያቄዎ ለ Admin ቀርቧል። በቅርቡ በቴሌብር ይላክላችኋል!");
             closeWallet();
+        }
+
+        // Live Feed Changer Generator
+        function startLiveFeed() {
+            const names = ["k*** alemu", "m*** single", "s*** sweet", "ab***_21", "t***_g", "n***_naty"];
+            const games = ["Br 200.00", "Br 1,500.00", "Br 50,000.00", "Br 450.00", "Br 8,000.00", "Br 120.00"];
+            setInterval(() => {
+                const rand = Math.floor(Math.random() * names.length);
+                document.getElementById('live-winner-row').innerHTML = `<span class="user-anon">${names[rand]}</span><span class="win-amt">${games[rand]}</span>`;
+            }, 3000);
         }
     </script>
 </body>
