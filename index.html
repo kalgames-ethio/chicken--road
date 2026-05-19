@@ -6,59 +6,271 @@
     <title>KalBet - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --bg-dark: #090c10; --card-bg: #12171e; --border-color: #1c2530; --accent-gold: #ffbd14; --accent-green: #00e676; --text-gray: #788c9f; }
-        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; background-color: var(--bg-dark); color: #fff; padding-bottom: 90px; overflow-x: hidden; }
-
-        .header { position: sticky; top:0; background: #12171e; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; z-index: 100; border-bottom: 1px solid var(--border-color); }
-        .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-        .brand-logo { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--accent-gold); }
-        .brand-text { font-weight: 900; font-size: 18px; color: var(--accent-gold); font-style: italic; }
-        .header-right { display: flex; align-items: center; gap: 8px; }
-        .wallet-pill { background: #090c10; padding: 5px 10px; border-radius: 30px; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border-color); }
-        .currency-icon { background: #0088cc; color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
-        .balance-val { font-weight: 800; color: #fff; font-size: 14px; }
-        .btn-deposit { background: var(--accent-green); color: #000; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 900; font-size: 12px; cursor: pointer; }
-
-        .banner { margin: 12px; background: linear-gradient(135deg, #1d2633, #12171e); border-radius: 14px; padding: 16px; position: relative; border: 1px solid var(--border-color); overflow: hidden; }
-        .banner h2 { margin: 0; font-size: 18px; color: #fff; font-weight: 900; }
-        .banner p { margin: 4px 0 0 0; color: var(--text-gray); font-size: 11px; font-weight: bold; }
-        .banner-icon { position: absolute; right: -5px; top: -5px; font-size: 70px; color: var(--accent-gold); opacity: 0.15; transform: rotate(-15deg); }
-
-        .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 0 12px; }
-        .q-item { background: var(--card-bg); border-radius: 12px; padding: 10px 4px; display: flex; flex-direction: column; align-items: center; gap: 5px; border: 1px solid var(--border-color); text-decoration: none; color: inherit; }
-        .q-icon { font-size: 20px; }
-        .q-label { font-size: 10px; color: var(--text-gray); font-weight: bold; text-align: center; }
-
-        .section-title { padding: 16px 14px 8px; font-size: 13px; font-weight: bold; color: var(--text-gray); }
-        .game-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 12px; }
-        .game-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; text-decoration: none; color: #fff; }
-        .game-left { display: flex; align-items: center; gap: 8px; }
-        .game-icon-box { font-size: 20px; width: 34px; height: 34px; background: #1c2530; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-        .game-name { font-size: 13px; font-weight: bold; }
-        .play-badge-btn { background: var(--accent-gold); color: #000; border: none; padding: 4px 10px; border-radius: 6px; font-weight: 900; font-size: 10px; }
-
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #12171e; display: flex; justify-content: space-around; padding: 8px 0 20px 0; border-top: 1px solid var(--border-color); z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-gray); text-decoration: none; font-size: 10px; font-weight: bold; width: 20%; }
-        .nav-item.active { color: var(--accent-gold); }
-        .nav-item i { font-size: 18px; }
-    </style>
+        :root { 
+            --bg-dark: #090c10; 
+            --card-bg: #12171e; 
+            --border-color: #1c2530; 
+            --accent-gold: #ffbd14; 
+            --accent-green: #00e676; 
+            --text-gray: #788c9f; 
+        }
+        * { 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+        body { 
+            margin: 0; 
+            background-color: var(--bg-dark); 
+            color: #fff; 
+            padding-bottom: 90px; 
+            overflow-x: hidden; 
+        }
+        a { 
+            color: inherit; 
+            text-decoration: none; 
+        }
+        
+        /* HEADER */
+        .header { 
+            position: sticky; 
+            top: 0; 
+            background: rgba(18, 23, 30, 0.95); 
+            backdrop-filter: blur(10px); 
+            padding: 10px 14px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            z-index: 100; 
+            border-bottom: 1px solid var(--border-color); 
+        }
+        .brand { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .brand-logo { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 8px; 
+            border: 1px solid var(--accent-gold); 
+            object-fit: cover; 
+        }
+        .brand-text { 
+            font-weight: 900; 
+            font-size: 18px; 
+            color: var(--accent-gold); 
+            font-style: italic; 
+        }
+        .header-right { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .wallet-pill { 
+            background: #090c10; 
+            padding: 5px 10px; 
+            border-radius: 30px; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            border: 1px solid var(--border-color); 
+        }
+        .currency-icon { 
+            background: #0088cc; 
+            color: #fff; 
+            width: 20px; 
+            height: 20px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 10px; 
+            font-weight: bold; 
+        }
+        .balance-val { 
+            font-weight: 800; 
+            font-size: 14px; 
+        }
+        .btn-deposit { 
+            background: var(--accent-green); 
+            color: #000; 
+            border: none; 
+            padding: 6px 12px; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 12px; 
+            cursor: pointer; 
+        }
+        
+        /* BANNER */
+        .banner { 
+            margin: 12px; 
+            background: linear-gradient(135deg, #1d2633, #12171e); 
+            border-radius: 14px; 
+            padding: 16px; 
+            position: relative; 
+            border: 1px solid var(--border-color); 
+            overflow: hidden; 
+        }
+        .banner h2 { 
+            margin: 0; 
+            font-size: 18px; 
+            font-weight: 900; 
+        }
+        .banner p { 
+            margin: 4px 0 0 0; 
+            color: var(--text-gray); 
+            font-size: 11px; 
+            font-weight: bold; 
+        }
+        .banner-icon { 
+            position: absolute; 
+            right: -10px; 
+            top: -10px; 
+            font-size: 80px; 
+            color: var(--accent-gold); 
+            opacity: 0.12; 
+            transform: rotate(-15deg); 
+        }
+        
+        /* QUICK GRID */
+        .quick-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 8px; 
+            padding: 0 12px; 
+        }
+        .q-item { 
+            background: var(--card-bg); 
+            border-radius: 12px; 
+            padding: 10px 4px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 5px; 
+            border: 1px solid var(--border-color); 
+            cursor: pointer; 
+            transition: 0.2s; 
+        }
+        .q-item:active { 
+            transform: scale(0.96); 
+        }
+        .q-icon { 
+            font-size: 20px; 
+        }
+        .q-label { 
+            font-size: 10px; 
+            color: var(--text-gray); 
+            font-weight: bold; 
+            text-align: center; 
+        }
+        
+        /* SECTION */
+        .section-title { 
+            padding: 16px 14px 8px; 
+            font-size: 13px; 
+            font-weight: bold; 
+            color: var(--text-gray); 
+        }
+        
+        /* GAME GRID */
+        .game-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 10px; 
+            padding: 0 12px; 
+        }
+        .game-card { 
+            background: var(--card-bg); 
+            border-radius: 12px; 
+            border: 1px solid var(--border-color); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 10px 12px; 
+            transition: 0.2s; 
+        }
+        .game-card:active { 
+            transform: scale(0.97); 
+        }
+        .game-left { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .game-icon-box { 
+            font-size: 20px; 
+            width: 34px; 
+            height: 34px; 
+            background: #1c2530; 
+            border-radius: 8px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .game-name { 
+            font-size: 13px; 
+            font-weight: bold; 
+        }
+        .play-badge-btn { 
+            background: var(--accent-gold); 
+            color: #000; 
+            border: none; 
+            padding: 4px 10px; 
+            border-radius: 6px; 
+            font-weight: 900; 
+            font-size: 10px; 
+            cursor: pointer;
+        }
+        
+        /* BOTTOM NAV */
+        .bottom-nav { 
+            position: fixed; 
+            bottom: 0; 
+            width: 100%; 
+            background: #12171e; 
+            display: flex; 
+            justify-content: space-around; 
+            padding: 8px 0 20px; 
+            border-top: 1px solid var(--border-color); 
+            z-index: 100; 
+        }
+        .nav-item { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 4px; 
+            color: var(--text-gray); 
+            font-size: 10px; 
+            font-weight: bold; 
+            width: 20%; 
+        }
+        .nav-item.active { 
+            color: var(--accent-gold); 
+        }
+        .nav-item i { 
+            font-size: 18px; 
+        }
+    </style> 
 </head>
 <body>
 
     <div class="header">
-        <a href="#" class="brand">
-            <img src="1000002633.png" class="brand-logo">
+        <div class="brand">
+            <img src="1000002633.png" class="brand-logo" alt="Logo">
             <span class="brand-text">KalBet</span>
-        </a>
-        <div class="header-right">
-            <div class="wallet-pill">
-                <div class="currency-icon">Br</div>
-                <span class="balance-val" id="main-balance">0.00</span>
-            </div>
-            <button class="btn-deposit" onclick="alert('ገንዘብ ለማስገባት ዋሌት ገጽ ይሂዱ!')"><i class="fa-solid fa-plus"></i> አስገባ</button>
+        </div> 
+        <div class="header-right"> 
+            <div class="wallet-pill"> 
+                <div class="currency-icon">Br</div> 
+                <span class="balance-val" id="main-balance">0.00</span> 
+            </div> 
+            <button class="btn-deposit" onclick="goDeposit()"> 
+                <i class="fa-solid fa-plus"></i> አስገባ 
+            </button> 
         </div>
-    </div>
+    </div> 
 
     <div class="banner">
         <h2>CRYPTO SPIN</h2>
@@ -67,19 +279,55 @@
     </div>
 
     <div class="quick-grid">
-        <a href="spin.html" class="q-item"><span class="q-icon">🎡</span><span class="q-label">ዕድለኛ ስፒን</span></a>
-        <div class="q-item" onclick="alert('በቅርቡ ይከፈታል!')"><span class="q-icon">🪙</span><span class="q-label">ሻሞ ኮይን</span></div>
-        <a href="coupon.html" class="q-item"><span class="q-icon">🎟️</span><span class="q-label">ኩፖን</span></a>
-        <div class="q-item" onclick="alert('VIP ገጽ በቅርቡ ይለቀቃል!')"><span class="q-icon">👑</span><span class="q-label">VIP ደረጃ</span></div>
+        <a href="spin.html" class="q-item">
+            <span class="q-icon">🎡</span>
+            <span class="q-label">ዕድለኛ ስፒን</span>
+        </a>
+        <div class="q-item" onclick="alert('ኮይን ሲስተም በቅርቡ ይከፈታል!')">
+            <span class="q-icon">🪙</span>
+            <span class="q-label">ኮይን</span>
+        </div>
+        <a href="coupon.html" class="q-item">
+            <span class="q-icon">🎟️</span>
+            <span class="q-label">ኩፖን</span>
+        </a>
+        <div class="q-item" onclick="alert('VIP ገጽ በቅርቡ ይለቀቃል!')">
+            <span class="q-icon">👑</span>
+            <span class="q-label">VIP ደረጃ</span>
+        </div>
     </div>
 
     <div class="section-title">የተመረጡ ጨዋታዎች</div>
-
+    
     <div class="game-grid">
-        <a href="aviator.html" class="game-card"><div class="game-left"><div class="game-icon-box">🚀</div><span class="game-name">Aviator</span></div><button class="play-badge-btn">PLAY</button></a>
-        <a href="chicken.html" class="game-card"><div class="game-left"><div class="game-icon-box">🐔</div><span class="game-name">Chicken</span></div><button class="play-badge-btn">PLAY</button></a>
-        <a href="chicken_roast.html" class="game-card"><div class="game-left"><div class="game-icon-box">🍗</div><span class="game-name">Roast</span></div><button class="play-badge-btn">PLAY</button></a>
-        <a href="mines.html" class="game-card"><div class="game-left"><div class="game-icon-box">💎</div><span class="game-name">Mines</span></div><button class="play-badge-btn">PLAY</button></a>
+        <a href="aviator.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">🚀</div>
+                <span class="game-name">Aviator</span>
+            </div>
+            <button class="play-badge-btn">PLAY</button>
+        </a>
+        <a href="chicken.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">🐔</div>
+                <span class="game-name">Chicken</span>
+            </div>
+            <button class="play-badge-btn">PLAY</button>
+        </a>
+        <a href="chicken_roast.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">🍗</div>
+                <span class="game-name">Roast</span>
+            </div>
+            <button class="play-badge-btn">PLAY</button>
+        </a>
+        <a href="mines.html" class="game-card">
+            <div class="game-left">
+                <div class="game-icon-box">💎</div>
+                <span class="game-name">Mines</span>
+            </div>
+            <button class="play-badge-btn">PLAY</button>
+        </a>
     </div>
 
     <div class="bottom-nav">
@@ -91,9 +339,16 @@
     </div>
 
     <script>
+        // የባላንስ መቆጣጠሪያ ከ LocalStorage ጋር
         let balance = 0.00;
-        if(localStorage.getItem('kb_balance')) { balance = parseFloat(localStorage.getItem('kb_balance')); }
+        if(localStorage.getItem('kb_balance')) { 
+            balance = parseFloat(localStorage.getItem('kb_balance')); 
+        }
         document.getElementById('main-balance').innerText = balance.toFixed(2);
+
+        function goDeposit() {
+            window.location.href = "withdraw.html?mode=deposit";
+        }
     </script>
 </body>
 </html>
