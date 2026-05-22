@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+/* 🛠️ ያንተ ማሻሻያ፡ ገጹ ሲቀያየር በለስላሳ ሁኔታ እንዲንሸራተት */
+html {
+    scroll-behavior: smooth;
+}
+
 *{
     margin:0;
     padding:0;
@@ -16,16 +21,20 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+/* 🛠️ ያንተ ማሻሻያ፡ ወደ ጎን መሸራተትን (Horizontal Scroll) ሙሉ በሙሉ ይከላከላል */
 body{
     background:#000;
     color:white;
     display:flex;
     justify-content:center;
-    padding:20px;
+    padding:20px 0;
+    overflow-x: hidden;
 }
 
+/* 🛠️ ያንተ ማሻሻያ፡ በሁሉም ስልኮች ስክሪን ላይ ሙሉ በሙሉ ተስማሚ (Responsive) እንዲሆን */
 .app{
-    width:390px;
+    width: 100%;
+    max-width: 390px;
     background:#0d0f10;
     border-radius:24px;
     overflow:hidden;
@@ -159,7 +168,7 @@ body{
     font-size:24px;
 }
 
-/* 🎮 GAMES GRID (ልክ እንደ ምስሉ በተርታ) */
+/* 🎮 GAMES GRID */
 .games-title{
     padding:20px 15px 10px;
     font-size:18px;
@@ -196,13 +205,6 @@ body{
     justify-content: center;
     font-size: 28px;
     position: relative;
-}
-
-/* ጨዋታዎችን በምስል ለመተካት ሲፈለግ ለመጠቀም */
-.game img{
-    width:100%;
-    height:85px;
-    object-fit:cover;
 }
 
 .game-info{
@@ -408,51 +410,6 @@ body{
     cursor: pointer;
 }
 
-/* TRANSACTIONS */
-.section-title{
-    padding:25px 15px 10px;
-    color:#aaa;
-    font-size:15px;
-    font-weight:bold;
-}
-
-.transaction-card{
-    margin:0 15px;
-    padding:18px 0;
-    border-bottom:1px solid #1f1f1f;
-    display:flex;
-    justify-content:space-between;
-}
-
-.trx-title{
-    font-size:18px;
-    font-weight:bold;
-}
-
-.trx-sub{
-    color:#888;
-    margin-top:5px;
-}
-
-.trx-right{
-    text-align:right;
-}
-
-.trx-amount{
-    color:#38ff7b;
-    font-size:26px;
-    font-weight:bold;
-}
-
-.trx-status{
-    margin-top:10px;
-    background:#12391f;
-    color:#2cff74;
-    padding:6px 12px;
-    border-radius:14px;
-    font-size:12px;
-}
-
 /* PROFILE */
 .profile-card{
     margin:25px 15px;
@@ -482,28 +439,6 @@ body{
 
 .profile-name{
     font-size:34px;
-    font-weight:bold;
-}
-
-.profile-balance{
-    margin-top:5px;
-    color:#aaa;
-}
-
-.vip-box{
-    border-top:1px solid #1f1f1f;
-    padding:20px;
-}
-
-.vip-label{
-    color:#d7a93e;
-    letter-spacing:3px;
-    font-size:12px;
-}
-
-.vip-title{
-    margin-top:10px;
-    font-size:28px;
     font-weight:bold;
 }
 
@@ -538,11 +473,12 @@ body{
     color:#39ff83;
 }
 
-/* BOTTOM NAV */
+/* 🛠️ ያንተ ማሻሻያ፡ የታችኛው ማውጫ ከሁሉም ስልክ ስክሪን ጋር እንዲተጣጠፍ */
 .bottom-nav{
     position:fixed;
     bottom:0;
-    width:390px;
+    width:100%;
+    max-width:390px;
     background:#111;
     border-top:1px solid #232728;
     display:flex;
@@ -651,30 +587,6 @@ body{
                     <div class="players">Br 28.9K</div>
                 </div>
             </div>
-
-            <div class="game" onclick="playGame('777 Slot')">
-                <div class="game-img-box" style="background: #450a0a; color: #f43f5e;">🎰</div>
-                <div class="game-info">
-                    <div class="game-title">777 Slot</div>
-                    <div class="players">Br 61.2K</div>
-                </div>
-            </div>
-
-            <div class="game" onclick="playGame('Dice')">
-                <div class="game-img-box" style="background: #1e293b; color: #94a3b8;">⚄</div>
-                <div class="game-info">
-                    <div class="game-title">Dice</div>
-                    <div class="players">Br 14.8K</div>
-                </div>
-            </div>
-
-            <div class="game" onclick="playGame('Plinko')">
-                <div class="game-img-box" style="background: #062f4f; color: #ff7b25;">🔺</div>
-                <div class="game-info">
-                    <div class="game-title">Plinko</div>
-                    <div class="players">Br 22.3K</div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -758,28 +670,39 @@ body{
                 </div>
             </div>
         </div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-title">TOTAL BETS</div>
+                <div class="stat-value">13</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-title">HIGHEST WIN</div>
+                <div class="stat-value green">ETB 11.88</div>
+            </div>
+        </div>
     </div>
 
 </div>
 
 <div class="bottom-nav">
-    <div class="nav-item active" onclick="switchTab('home', this)">
+    <div class="nav-item active" onclick="switchTab('home')">
         <i class="fa-solid fa-house"></i>
         <span>Home</span>
     </div>
-    <div class="nav-item" onclick="switchTab('games', this)">
+    <div class="nav-item" onclick="switchTab('games')">
         <i class="fa-solid fa-gamepad"></i>
         <span>Games</span>
     </div>
-    <div class="nav-item" onclick="switchTab('wallet', this)">
+    <div class="nav-item" onclick="switchTab('wallet')">
         <i class="fa-solid fa-wallet"></i>
         <span>Wallet</span>
     </div>
-    <div class="nav-item" onclick="switchTab('vip', this)">
+    <div class="nav-item" onclick="switchTab('vip')">
         <i class="fa-solid fa-crown"></i>
         <span>VIP</span>
     </div>
-    <div class="nav-item" onclick="switchTab('profile', this)">
+    <div class="nav-item" onclick="switchTab('profile')">
         <i class="fa-solid fa-user"></i>
         <span>Profile</span>
     </div>
@@ -796,17 +719,19 @@ function updateUI() {
     document.getElementById('bonus-bal').innerText = "ETB " + bonusBalance.toFixed(2);
 }
 
-function switchTab(pageId, element) {
+/* 🛠️ ያንተ ማሻሻያ፡ ከማንኛውም ገጽ ወደ ሌላ ገጽ ስንዘዋወር የበተን ምልክቱ ራሱ ፈልጎ አክቲቭ የሚሆንበት ሲስተም */
+function switchTab(pageId) {
     document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
     document.getElementById('page-' + pageId).classList.add('active');
     
-    if(element) {
-        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-        element.classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    
+    const targetBtn = document.querySelector(`.nav-item[onclick*="${pageId}"]`);
+    if(targetBtn){
+        targetBtn.classList.add('active');
     }
 }
 
-// የጨዋታ መክፈቻ ሲስተም ጥሪ
 function playGame(gameName) {
     alert(`🎮 ${gameName} ጨዋታ በተሳካ ሁኔታ እየተጫነ ነው...`);
 }
