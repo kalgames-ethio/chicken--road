@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KalBet - Pro UI</title>
+<title>KalBet - Pro UI with iframe Games</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-/* 🛠️ ያንተ ማሻሻያ፡ ገጹ ሲቀያየር በለስላሳ ሁኔታ እንዲንሸራተት */
 html {
     scroll-behavior: smooth;
 }
@@ -21,7 +20,6 @@ html {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* 🛠️ ያንተ ማሻሻያ፡ ወደ ጎን መሸራተትን (Horizontal Scroll) ሙሉ በሙሉ ይከላከላል */
 body{
     background:#000;
     color:white;
@@ -31,7 +29,6 @@ body{
     overflow-x: hidden;
 }
 
-/* 🛠️ ያንተ ማሻሻያ፡ በሁሉም ስልኮች ስክሪን ላይ ሙሉ በሙሉ ተስማሚ (Responsive) እንዲሆን */
 .app{
     width: 100%;
     max-width: 390px;
@@ -473,7 +470,7 @@ body{
     color:#39ff83;
 }
 
-/* 🛠️ ያንተ ማሻሻያ፡ የታችኛው ማውጫ ከሁሉም ስልክ ስክሪን ጋር እንዲተጣጠፍ */
+/* BOTTOM NAV */
 .bottom-nav{
     position:fixed;
     bottom:0;
@@ -540,7 +537,7 @@ body{
 
         <div class="games-title">Popular Games</div>
         <div class="games">
-            <div class="game" onclick="playGame('Aviator')">
+            <div class="game" onclick="openGame('Aviator', 'games/aviator.html')">
                 <div class="game-img-box" style="background: #1a0f12; color: #ff3344;">🚀</div>
                 <div class="game-info">
                     <div class="game-title">Aviator</div>
@@ -548,7 +545,7 @@ body{
                 </div>
             </div>
 
-            <div class="game" onclick="playGame('Keno')">
+            <div class="game" onclick="openGame('Keno', 'games/keno.html')">
                 <div class="game-img-box" style="background: #0f172a; color: #38bdf8;">🎱</div>
                 <div class="game-info">
                     <div class="game-title">Keno</div>
@@ -556,7 +553,7 @@ body{
                 </div>
             </div>
 
-            <div class="game" onclick="playGame('Chicken Road')">
+            <div class="game" onclick="openGame('Chicken Road', 'games/chicken.html')">
                 <div class="game-img-box" style="background: #1c1917; color: #eab308;">🐔</div>
                 <div class="game-info">
                     <div class="game-title">Chicken Road</div>
@@ -564,7 +561,7 @@ body{
                 </div>
             </div>
 
-            <div class="game" onclick="playGame('Mines')">
+            <div class="game" onclick="openGame('Mines', 'games/mines.html')">
                 <div class="game-img-box" style="background: #091e14; color: #22c55e;">💎</div>
                 <div class="game-info">
                     <div class="game-title">Mines</div>
@@ -572,7 +569,7 @@ body{
                 </div>
             </div>
 
-            <div class="game" onclick="playGame('Zingo')">
+            <div class="game" onclick="openGame('Zingo', 'games/zingo.html')">
                 <div class="game-img-box" style="background: #2e1065; color: #a855f7;">🎲</div>
                 <div class="game-info">
                     <div class="game-title">Zingo</div>
@@ -652,7 +649,7 @@ body{
 
     <div id="page-vip" class="page">
         <div class="profile-card">
-            <div class="vip-box" style="border:none;">
+            <div class="vip-box" style="border:none; padding:20px;">
                 <div class="vip-label">VIP CLUB • LEVEL 1</div>
                 <div class="vip-title" style="color:#63ff72;">PRO EXPLORER</div>
                 <p style="color:#888; font-size:14px; margin-top:10px;">በቀጣይ ጨዋታዎች ላይ የ 5% ተጨማሪ ቦነስ ያገኛሉ!</p>
@@ -684,6 +681,53 @@ body{
     </div>
 
 </div>
+
+<div id="gameModal" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+z-index:9999;
+flex-direction:column;
+">
+
+    <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    background:#111;
+    border-bottom:1px solid #222;
+    ">
+        <h3 id="gameTitle">Game</h3>
+
+        <button onclick="closeGame()" style="
+        background:red;
+        color:white;
+        border:none;
+        padding:10px 15px;
+        border-radius:10px;
+        font-weight:bold;
+        ">
+            X
+        </button>
+    </div>
+
+    <iframe id="gameFrame"
+    src=""
+    style="
+    flex:1;
+    width:100%;
+    border:none;
+    background:#000;
+    ">
+    </iframe>
+
+</div>
+
 
 <div class="bottom-nav">
     <div class="nav-item active" onclick="switchTab('home')">
@@ -719,7 +763,6 @@ function updateUI() {
     document.getElementById('bonus-bal').innerText = "ETB " + bonusBalance.toFixed(2);
 }
 
-/* 🛠️ ያንተ ማሻሻያ፡ ከማንኛውም ገጽ ወደ ሌላ ገጽ ስንዘዋወር የበተን ምልክቱ ራሱ ፈልጎ አክቲቭ የሚሆንበት ሲስተም */
 function switchTab(pageId) {
     document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
     document.getElementById('page-' + pageId).classList.add('active');
@@ -732,8 +775,16 @@ function switchTab(pageId) {
     }
 }
 
-function playGame(gameName) {
-    alert(`🎮 ${gameName} ጨዋታ በተሳካ ሁኔታ እየተጫነ ነው...`);
+/* 🛠️ ያንተ አዲስ የጃቫስክሪፕት ፈንክሽኖች ሙሉ በሙሉ እዚህ ገብተዋል */
+function openGame(gameName, gameUrl){
+    document.getElementById("gameTitle").innerText = gameName;
+    document.getElementById("gameFrame").src = gameUrl;
+    document.getElementById("gameModal").style.display = "flex";
+}
+
+function closeGame(){
+    document.getElementById("gameModal").style.display = "none";
+    document.getElementById("gameFrame").src = "";
 }
 
 // 🎡 ስፒን ማሽን
@@ -753,7 +804,7 @@ function startSpin() {
         
         if(wonAmt > 0) {
             bonusBalance += wonAmt;
-            alert(`🎉 እንኳን ደስ አለዎት! ${wonAmt} ብር ቦነስ አሸንፈዋል!`);
+            alert(`🎉 እንኳን ደስ አለዎት! ${wonAmt} ብር ቦነስ ያገኙ!`);
         } else {
             alert(`❌ በዚህ ዙር አልወጣልዎትም፤ እንደገና ይሞክሩ።`);
         }
