@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>KalBet - Ultimate Telegram Bot UI</title>
+<title>KalBet - Premium UI with Real Images & iframe Games</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -16,7 +16,7 @@ html {
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: Arial, sans-serif;
+    font-family:Arial,sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -25,7 +25,7 @@ body{
     color:white;
     display:flex;
     justify-content:center;
-    padding: 0;
+    padding:0;
     overflow-x: hidden;
 }
 
@@ -46,7 +46,7 @@ body{
     display: block;
 }
 
-/* 🔝 TOPBAR (ልክ እንደ ፎቶው) */
+/* TOPBAR */
 .topbar{
     display:flex;
     justify-content:space-between;
@@ -59,26 +59,26 @@ body{
     border-bottom: 1px solid #171c1f;
 }
 
-.logo-section{
+.logo{
     display:flex;
     align-items:center;
     gap:8px;
 }
 
-/* ያንተ የቦት ሎጎ ምስል መገኛ */
-.logo-img{
-    width:35px;
-    height:35px;
-    border-radius:50%;
+.logo-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     border: 1px solid #63ff72;
     object-fit: cover;
 }
 
-.brand-name{
-    font-size:18px;
-    font-weight:900;
-    color:#ffffff;
+.brand-name {
+    font-size: 18px;
+    font-weight: 900;
+    color: #ffffff;
 }
+
 .brand-name span {
     color: #39e58c;
 }
@@ -89,7 +89,7 @@ body{
     gap: 10px;
 }
 
-.balance-display{
+.balance{
     background:#13181b;
     border:1px solid #20292e;
     padding:8px 12px;
@@ -102,7 +102,7 @@ body{
     gap: 5px;
 }
 
-.deposit-btn-top{
+.deposit-btn-top {
     background: linear-gradient(180deg, #a6ffb3, #19b043);
     color: #000000;
     border: none;
@@ -114,8 +114,8 @@ body{
     cursor: pointer;
 }
 
-/* 🎫 HERO BANNER */
-.hero-banner{
+/* BANNER */
+.banner{
     margin:15px;
     border-radius:20px;
     background: linear-gradient(135deg, #051a0a 0%, #0d3d17 50%, #155e24 100%);
@@ -129,12 +129,12 @@ body{
 }
 
 .banner-text-side {
-    max-width: 60%;
+    max-width: 65%;
     z-index: 2;
 }
 
 .banner-text-side h1{
-    font-size:22px;
+    font-size:20px;
     font-weight: 800;
     line-height:1.2;
     color: #ffffff;
@@ -147,9 +147,8 @@ body{
 }
 
 .banner-img-side {
-    position: relative;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     z-index: 2;
 }
 
@@ -161,7 +160,7 @@ body{
 
 .carousel-dots {
     position: absolute;
-    bottom: 10px;
+    bottom: 8px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -177,37 +176,42 @@ body{
 
 .dot.active {
     background: #63ff72;
-    width: 15px;
+    width: 14px;
     border-radius: 4px;
 }
 
-/* 🎛️ ባለ 2-አምድ ፈጣን ሜኑ */
-.quick-menu-grid{
+/* MENU GRID */
+.menu-grid{
     display:grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:1fr 1fr;
     gap:10px;
-    padding: 0 15px;
+    padding:0 15px;
     margin-bottom: 20px;
 }
 
-.quick-card{
+.menu-card{
     background:#0d1215;
     border:1px solid #1a2226;
     border-radius:14px;
-    padding:12px;
+    padding:14px 12px;
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    justify-content: space-between;
     cursor: pointer;
+    transition: 0.2s;
 }
 
-.quick-left {
+.menu-card:active {
+    transform: scale(0.96);
+}
+
+.menu-left-content {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.quick-icon-circle {
+.menu-icon-wrapper {
     width: 34px;
     height: 34px;
     border-radius: 50%;
@@ -217,25 +221,26 @@ body{
     justify-content: center;
 }
 
-.quick-card span{
+.menu-text-wrapper span{
     font-size:12px;
     font-weight:bold;
     color: #ffffff;
+    display: block;
 }
 
-.quick-card p{
+.menu-text-wrapper p {
     font-size: 10px;
     color: #667780;
     margin-top: 2px;
 }
 
-.quick-card i.arrow {
+.menu-card i.arrow-icon{
     color:#445560;
     font-size:12px;
 }
 
-/* 🎮 GAMES GRID SECTION */
-.section-header{
+/* 🎮 GAMES GRID */
+.games-title{
     padding:10px 15px;
     font-size:15px;
     font-weight:bold;
@@ -244,40 +249,40 @@ body{
     letter-spacing: 0.5px;
 }
 
-.games-container{
-    padding: 0 15px;
+.games{
+    padding:0 15px;
     display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    grid-template-columns:repeat(3, 1fr);
+    gap:12px;
 }
 
-.game-item-card{
+.game-card{
     text-align:center;
     cursor: pointer;
 }
 
-.game-cover-box{
+.game-image-wrap {
     position: relative;
-    width:100%;
+    width: 100%;
     aspect-ratio: 1/1;
-    border-radius:16px;
-    border:1px solid #1c252c;
+    border-radius: 16px;
+    border: 1px solid #1c252c;
     box-shadow: 0 6px 12px rgba(0,0,0,0.5);
     overflow: hidden;
 }
 
-.game-cover-box img{
-    width: 100%;
+.game-image{
+    width:100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.2s;
+    object-fit:cover;
+    transition:0.2s;
 }
 
-.game-item-card:active .game-cover-box img{
-    transform: scale(0.95);
+.game-card:active .game-image{
+    transform:scale(0.95);
 }
 
-.game-label-name{
+.game-name{
     font-size:12px;
     font-weight: 600;
     margin-top:8px;
@@ -287,38 +292,38 @@ body{
     text-overflow:ellipsis;
 }
 
-.game-stats-vol{
+.game-vol {
     margin-top:3px;
     color:#39e58c;
     font-size:11px;
     font-weight: bold;
 }
 
-/* 🎡 ዕድለኛ ስፒን ገጽ */
+/* 🎡 ዕድለኛ ስፒን ማሽን */
 .spin-container {
-    padding: 20px;
+    padding: 15px;
     text-align: center;
 }
 .wheel-wrapper {
     position: relative;
-    width: 240px;
-    height: 240px;
-    margin: 30px auto;
+    width: 230px;
+    height: 230px;
+    margin: 20px auto;
 }
 .wheel {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 6px solid #39e58c;
+    border: 5px solid #39e58c;
     background: conic-gradient(#149c3b 0deg 60deg, #111 60deg 120deg, #63ff72 120deg 180deg, #222 180deg 240deg, #39e58c 240deg 300deg, #333 300deg 360deg);
     transition: transform 4s cubic-bezier(0.1, 0.8, 0.3, 1);
 }
 .pointer {
     position: absolute;
-    top: -18px;
+    top: -16px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 28px;
+    font-size: 26px;
     color: #39e58c;
     z-index: 10;
 }
@@ -326,18 +331,20 @@ body{
     background: linear-gradient(180deg, #67ff7b, #149c3b);
     color: #000;
     border: none;
-    padding: 15px 50px;
+    padding: 14px 45px;
     font-weight: bold;
-    border-radius: 14px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
+    margin-top: 15px;
     box-shadow: 0 4px 15px rgba(57, 229, 140, 0.3);
 }
 
-/* 💳 WALLET STYLE */
+/* WALLET */
 .wallet-wrapper-box{
     padding:20px 15px;
 }
+
 .balance-card-premium{
     background: linear-gradient(135deg, #0d1316, #072211);
     border: 1px solid #153c23;
@@ -345,7 +352,40 @@ body{
     padding: 20px;
 }
 
-/* 📲 ጌም ሞዳል (IFRAME) */
+/* STATS */
+.stats-grid{
+    padding:15px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.stat-box{
+    background:#0d1215;
+    border:1px solid #182126;
+    border-radius:14px;
+    padding:18px 12px;
+    text-align:center;
+}
+
+.stat-title{
+    color:#6f7d85;
+    font-size:11px;
+    letter-spacing: 0.5px;
+}
+
+.stat-value{
+    margin-top:8px;
+    font-size:20px;
+    font-weight:bold;
+    color: #fff;
+}
+
+.green{
+    color:#39e58c;
+}
+
+/* 📲 GAME MODAL (IFRAME) */
 #gameModal {
     display:none;
     position:fixed;
@@ -358,7 +398,7 @@ body{
     flex-direction:column;
 }
 
-/* 🧭 NAVIGATION BAR (ልክ በፎቶው ላይ እንዳለው አረንጓዴ ማዕከል) */
+/* 🧭 BOTTOM NAVIGATION */
 .bottom-navigation-bar{
     position:fixed;
     bottom:0;
@@ -401,7 +441,6 @@ body{
     height: 45px;
     border-radius: 8px;
     justify-content: center;
-    font-weight: bold;
     flex: none;
     box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
 }
@@ -417,21 +456,18 @@ body{
 <div class="app">
 
     <div class="topbar">
-        <div class="logo-section">
+        <div class="logo">
             <img src="https://i.imgur.com/8Km9tLL.jpeg" class="logo-img" alt="KG">
             <div class="brand-name">Kal<span>Bet</span></div>
         </div>
         <div class="topbar-right">
-            <div class="balance-display" id="top-balance">
-                <span style="color:#8e9aa2;">ብር</span> 1,000.00
-            </div>
+            <div class="balance" id="top-balance"><span style="color:#8e9aa2;">ብር</span> 1,000.00</div>
             <button class="deposit-btn-top" onclick="switchTab('wallet')">ገንዘብ አስገባ</button>
         </div>
     </div>
 
     <div id="page-home" class="page active">
-        
-        <div class="hero-banner">
+        <div class="banner">
             <div class="banner-text-side">
                 <h1>KalBet ካፒታል ስፒን - ያልተገደበ ትርፍ ያግኙ!</h1>
                 <p>አሁኑኑ ይሽከረክሩ እና ያሸንፉ</p>
@@ -446,95 +482,233 @@ body{
             </div>
         </div>
 
-        <div class="quick-menu-grid">
-            <div class="quick-card" onclick="switchTab('games')">
-                <div class="quick-left">
-                    <div class="quick-icon-circle"><i class="fa-solid fa-dharmachakra" style="color:#39e58c;"></i></div>
-                    <div><span>ዕድለኛ ስፒን</span><p>ማሽን አሽከርክር</p></div>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="switchTab('games')">
+                <div class="menu-left-content">
+                    <div class="menu-icon-wrapper"><i class="fa-solid fa-dharmachakra" style="color:#39e58c;"></i></div>
+                    <div class="menu-text-wrapper"><span>ዕለታዊ ስፒን</span><p>ማሽን አሽከርክር</p></div>
                 </div>
-                <i class="fa-solid fa-chevron-right arrow"></i>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </div>
             
-            <div class="quick-card" onclick="alert('ያልተገደበ ጉርሻ በቅርቡ ይከፈታል!')">
-                <div class="quick-left">
-                    <div class="quick-icon-circle"><i class="fa-solid fa-coins" style="color:#f3c144;"></i></div>
-                    <div><span>ያልተገደበ ጉርሻ</span><p>ያልተገደበ ጉርሻ</p></div>
+            <div class="menu-card" onclick="alert('ያልተገደበ ጉርሻ በቅርቡ ይከፈታል!')">
+                <div class="menu-left-content">
+                    <div class="menu-icon-wrapper"><i class="fa-solid fa-coins" style="color:#f3c144;"></i></div>
+                    <div class="menu-text-wrapper"><span>ያልተገደበ ጉርሻ</span><p>ያልተገደበ ጉርሻ</p></div>
                 </div>
-                <i class="fa-solid fa-chevron-right arrow"></i>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </div>
 
-            <div class="quick-card" onclick="openCouponPrompt()">
-                <div class="quick-left">
-                    <div class="quick-icon-circle"><i class="fa-solid fa-ticket" style="color:#ff4757;"></i></div>
-                    <div><span>ፕሮሞሽን ኮድ</span><p>ኮድ አስገባ</p></div>
+            <div class="menu-card" onclick="openCouponPrompt()">
+                <div class="menu-left-content">
+                    <div class="menu-icon-wrapper"><i class="fa-solid fa-ticket" style="color:#ff4757;"></i></div>
+                    <div class="menu-text-wrapper"><span>ፕሮሞሽን ኮድ</span><p>ኮድ አስገባ</p></div>
                 </div>
-                <i class="fa-solid fa-chevron-right arrow"></i>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </div>
 
-            <div class="quick-card" onclick="switchTab('vip')">
-                <div class="quick-left">
-                    <div class="quick-icon-circle"><i class="fa-solid fa-crown" style="color:#ffa502;"></i></div>
-                    <div><span>VIP ክለብ</span><p>EXPLORER</p></div>
+            <div class="menu-card" onclick="switchTab('vip')">
+                <div class="menu-left-content">
+                    <div class="menu-icon-wrapper"><i class="fa-solid fa-crown" style="color:#ffa502;"></i></div>
+                    <div class="menu-text-wrapper"><span>VIP ክለብ</span><p>EXPLORER</p></div>
                 </div>
-                <i class="fa-solid fa-chevron-right arrow"></i>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </div>
         </div>
 
-        <div class="section-header">ታዋቂ ጨዋታዎች</div>
-        <div class="games-container">
+        <div class="games-title">ታዋቂ ጨዋታዎች</div>
+        <div class="games">
             
-            <div class="game-item-card" onclick="openGame('Aviator', 'games/aviator.html')">
-                <div class="game-cover-box">
-                    <img src="https://i.imgur.com/8Km9tLL.jpeg" alt="Aviator">
-                </div>
-                <div class="game-label-name">አቪያተር ስፒን</div>
-                <div class="game-stats-vol">Br 88.1K</div>
+            <div class="game-card" onclick="openGame('Aviator', 'games/aviator.html')">
+                <div class="game-image-wrap"><img src="https://i.imgur.com/8Km9tLL.jpeg" class="game-image"></div>
+                <p class="game-name">አቪያተር ስፒን</p>
+                <div class="game-vol">Br 88.1K</div>
             </div>
 
-            <div class="game-item-card" onclick="openGame('Chicken Road 2', 'games/chicken.html')">
-                <div class="game-cover-box">
-                    <img src="https://i.imgur.com/JqeuJ6t.jpeg" alt="Chicken Road 2">
-                </div>
-                <div class="game-label-name">ኬኖ</div>
-                <div class="game-stats-vol">Br 29.9K</div>
+            <div class="game-card" onclick="openGame('Chicken Road 2', 'games/chicken.html')">
+                <div class="game-image-wrap"><img src="https://i.imgur.com/JqeuJ6t.jpeg" class="game-image"></div>
+                <p class="game-name">ኬኖ</p>
+                <div class="game-vol">Br 29.9K</div>
             </div>
 
-            <div class="game-item-card" onclick="openGame('Multi Hot 5', 'games/multihot.html')">
-                <div class="game-cover-box">
-                    <img src="https://i.imgur.com/XM7bY0x.jpeg" alt="Multi Hot 5">
-                </div>
-                <div class="game-label-name">ዚንጎ</div>
-                <div class="game-stats-vol">Br 31.9K</div>
+            <div class="game-card" onclick="openGame('Multi Hot 5', 'games/multihot.html')">
+                <div class="game-image-wrap"><img src="https://i.imgur.com/XM7bY0x.jpeg" class="game-image"></div>
+                <p class="game-name">ዚንጎ</p>
+                <div class="game-vol">Br 31.9K</div>
             </div>
 
-            <div class="game-item-card" onclick="openGame('Fast Keno', 'games/keno.html')">
-                <div class="game-cover-box">
-                    <img src="https://i.imgur.com/L1aE1vM.jpeg" alt="Fast Keno">
-                </div>
-                <div class="game-label-name">ሎተሪ</div>
-                <div class="game-stats-vol">Br 51.9K</div>
+            <div class="game-card" onclick="openGame('Fast Keno', 'games/keno.html')">
+                <div class="game-image-wrap"><img src="https://i.imgur.com/L1aE1vM.jpeg" class="game-image"></div>
+                <p class="game-name">ሎተሪ</p>
+                <div class="game-vol">Br 51.9K</div>
             </div>
 
-            <div class="game-item-card" onclick="switchTab('games')">
-                <div class="game-cover-box">
-                    <img src="https://i.imgur.com/3sKQH0h.jpeg" alt="Fortune Spin">
-                </div>
-                <div class="game-label-name">ዋይሌት ስፒን</div>
-                <div class="game-stats-vol">Br 28.9K</div>
+            <div class="game-card" onclick="switchTab('games')">
+                <div class="game-image-wrap"><img src="https://i.imgur.com/3sKQH0h.jpeg" class="game-image"></div>
+                <p class="game-name">ዋይሌት ስፒን</p>
+                <div class="game-vol">Br 28.9K</div>
             </div>
 
-            <div class="game-item-card" onclick="openGame('Mine Gems', 'games/mines.html')">
-                <div class="game-cover-box">
-                    <img src="https://i.imgur.com/c6K8k6B.jpeg" alt="Mine Gems">
-                </div>
-                <div class="game-label-name">ዋይሌደር ስፒን</div>
-                <div class="game-stats-vol">Br 51.9K</div>
+            <div class="game-card" onclick="openGame('Mine Gems', 'games/mines.html')">
+                <div class="game-image-wrap"><img src="https://i.imgur.com/c6K8k6B.jpeg" class="game-image"></div>
+                <p class="game-name">ዋይሌደር ስፒን</p>
+                <div class="game-vol">Br 51.9K</div>
             </div>
 
         </div>
     </div>
 
     <div id="page-games" class="page">
-        <div class="section-header" style="text-align:center; margin-top:20px;">🎡 ዕድለኛ ስፒን ማሽን</div>
+        <div class="games-title" style="text-align:center; margin-top:20px;">🎡 ዕድለኛ ስፒን ማሽን</div>
         <div class="spin-container">
-            <div class="wheel-
+            <div class="wheel-wrapper">
+                <div class="pointer">▼</div>
+                <div class="wheel" id="wheel"></div>
+            </div>
+            <button class="spin-btn" onclick="startSpin()">አሽከርክር</button>
+        </div>
+    </div>
+
+    <div id="page-wallet" class="page">
+        <div class="wallet-wrapper-box">
+            <div class="balance-card-premium">
+                <h2 style="font-size:16px; color:#8e9aa2;">ዋና ሂሳብ</h2>
+                <h1 style="font-size:40px; margin-top:10px; color:#39e58c;" id="walletBalance">1,000.00 ETB</h1>
+
+                <div style="display:flex; gap:10px; margin-top:20px;">
+                    <button class="deposit-btn-top" style="flex:1;" onclick="alert('ቴሌብር በቅርቡ ይከፈታል!')">ገንዘብ አስገባ</button>
+                    <button class="deposit-btn-top" style="flex:1; background:#111; color:#fff; border:1px solid #1f2b31;" onclick="alert('ገንዘብ ማውጣት በቅርቡ ይከፈታል!')">ገንዘብ አውጣ</button>
+                </div>
+            </div>
+
+            <div style="margin-top:25px;">
+                <div class="games-title" style="padding:10px 0;">የቅርብ ጊዜ እንቅስቃሴዎች</div>
+
+                <div style="background:#0d1215; border:1px solid #182126; border-radius:16px; padding:15px; margin-top:10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <div style="font-weight:bold;">Deposit</div>
+                            <div style="font-size:12px; color:#6f7d85; margin-top:4px;">Telebirr</div>
+                        </div>
+                        <div style="color:#39e58c; font-weight:bold;">+500 ETB</div>
+                    </div>
+                </div>
+
+                <div style="background:#0d1215; border:1px solid #182126; border-radius:16px; padding:15px; margin-top:10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <div style="font-weight:bold;">Spin Bonus</div>
+                            <div style="font-size:12px; color:#6f7d85; margin-top:4px;">Lucky Spin</div>
+                        </div>
+                        <div style="color:#39e58c; font-weight:bold;">+50 ETB</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-vip" class="page">
+        <div style="padding:20px 15px;">
+            <div style="background:linear-gradient(135deg,#1b1402,#3d2f07); border:1px solid #6e5715; border-radius:20px; padding:25px;">
+                <div style="font-size:13px; color:#f3c144; letter-spacing:2px;">VIP CLUB</div>
+                <div style="font-size:35px; font-weight:900; margin-top:10px;">EXPLORER</div>
+                <p style="margin-top:10px; color:#d6c28c; line-height:1.5;">
+                    የ VIP አባልነት በመጠቀም ተጨማሪ ቦነስ እና ልዩ ጨዋታዎች ያገኛሉ።
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-profile" class="page">
+        <div class="wallet-wrapper-box" style="padding-bottom:0;">
+            <div style="background:#0d1215; border:1px solid #1a2226; border-radius:20px; padding:20px; display:flex; align-items:center; gap:15px;">
+                <div style="width:60px; height:60px; border-radius:14px; background:#192227; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold; color:#39e58c;">Y</div>
+                <div>
+                    <div style="font-size:22px; font-weight:bold;">yab</div>
+                    <div style="font-size:13px; color:#6f7d85; margin-top:4px;">ID #82731</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-title">TOTAL BETS</div>
+                <div class="stat-value">24</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-title">HIGHEST WIN</div>
+                <div class="stat-value green">850 ETB</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-title">MOST PLAYED</div>
+                <div class="stat-value" style="font-size:16px;">Aviator</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-title">BONUS WON</div>
+                <div class="stat-value green">120 ETB</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="gameModal">
+    <div style="height:55px; background:#0b0e10; display:flex; align-items:center; justify-content:space-between; padding:0 15px; border-bottom:1px solid #161c20;">
+        <div id="modalGameTitle" style="font-weight:bold;">Game</div>
+        <button onclick="closeGame()" style="background:#111; color:white; border:none; width:36px; height:36px; border-radius:10px; cursor:pointer;">✕</button>
+    </div>
+    <iframe id="gameFrame" src="" style="flex:1; width:100%; border:none; background:#000;"></iframe>
+</div>
+
+<div class="bottom-navigation-bar">
+    <div class="nav-link-item active" onclick="switchTab('home', this)">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </div>
+    <div class="nav-link-item" onclick="switchTab('games', this)">
+        <i class="fa-solid fa-dharmachakra"></i>
+        <span>Spin</span>
+    </div>
+    <div class="nav-link-item center-play-hub" onclick="switchTab('wallet', this)">
+        <i class="fa-solid fa-wallet"></i>
+    </div>
+    <div class="nav-link-item" onclick="switchTab('vip', this)">
+        <i class="fa-solid fa-crown"></i>
+        <span>VIP</span>
+    </div>
+    <div class="nav-link-item" onclick="switchTab('profile', this)">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+    </div>
+</div>
+
+<script>
+let balance = 1000.00;
+let isSpinning = false;
+
+function switchTab(pageId, element){
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById('page-' + pageId).classList.add('active');
+
+    // የበታች ሜኑዎችን አክቲቭ ስታይል ለመቀየር
+    document.querySelectorAll('.nav-link-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    if(element){
+        element.classList.add('active');
+    } else {
+        // በቀጥታ ከላይኛው በተን ሲነካ የበታቹን ለማብራት
+        const targetBtn = document.querySelector(`.nav-link-item[onclick*="${pageId}"]`);
+        if(targetBtn) targetBtn.classList.add('active');
+    }
+}
+
+function openCouponPrompt(){
+    let code = prompt('ፕሮሞ ኮድ ያስገቡ');
+    if(code && code.toUpperCase() === 'KALBET50'){
+        balance += 50;
+        update
