@@ -1,40 +1,580 @@
-<!-- Wallet Section -->
-<div class="wallet-page">
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KalBet Full UI</title>
 
-    <div class="wallet-card">
-        <div class="wallet-top">
-            <div class="currency-circle">Br</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-            <div>
-                <div class="wallet-label">TOTAL BALANCE</div>
-                <div class="wallet-balance">ETB <span id="main-balance">12.30</span></div>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#000;
+    color:white;
+    display:flex;
+    justify-content:center;
+    padding:20px;
+}
+
+.app{
+    width:390px;
+    background:#0d0f10;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid #1e1f20;
+    position:relative;
+    padding-bottom:90px;
+}
+
+/* TOPBAR */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    background:#111;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-box{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:linear-gradient(180deg,#67ff7b,#149c3b);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#111;
+    font-weight:bold;
+}
+
+.logo-text{
+    font-size:24px;
+    font-weight:900;
+    color:#63ff72;
+}
+
+.balance{
+    background:#181b1d;
+    border:1px solid #2a3133;
+    padding:10px 14px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+/* BANNER */
+
+.banner{
+    margin:15px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#103a13,#39d353);
+    padding:20px;
+    position:relative;
+    overflow:hidden;
+}
+
+.banner h1{
+    font-size:34px;
+    line-height:1.1;
+}
+
+.banner p{
+    margin-top:10px;
+    color:#d9ffdf;
+}
+
+.circle{
+    position:absolute;
+    right:-30px;
+    top:10px;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
+}
+
+.gift{
+    position:absolute;
+    right:25px;
+    bottom:10px;
+    font-size:60px;
+}
+
+/* MENU */
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    padding:0 15px;
+}
+
+.menu-card{
+    background:#151718;
+    border:1px solid #242829;
+    border-radius:16px;
+    padding:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.menu-card span{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.menu-card i{
+    color:#63ff72;
+    font-size:24px;
+}
+
+/* GAMES */
+
+.games-title{
+    padding:20px 15px 10px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.games{
+    padding:0 15px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.game{
+    background:#17191b;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid #232728;
+}
+
+.game img{
+    width:100%;
+    height:90px;
+    object-fit:cover;
+}
+
+.game-info{
+    padding:8px;
+}
+
+.game-title{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.players{
+    margin-top:5px;
+    color:#63ff72;
+    font-size:12px;
+}
+
+/* WALLET */
+
+.wallet-page{
+    padding:20px 15px;
+}
+
+.wallet-card{
+    background:linear-gradient(135deg,#101010,#132117);
+    border:1px solid #203025;
+    border-radius:24px;
+    padding:20px;
+}
+
+.wallet-top{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.currency-circle{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#157347;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#ffd54a;
+    font-weight:bold;
+    font-size:22px;
+}
+
+.wallet-label{
+    color:#888;
+    font-size:12px;
+    letter-spacing:2px;
+}
+
+.wallet-balance{
+    font-size:42px;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.wallet-balance span{
+    color:#43f59b;
+}
+
+.balance-box{
+    margin-top:15px;
+    background:#141414;
+    border:1px solid #222;
+    border-radius:22px;
+    padding:18px;
+}
+
+.small-title{
+    font-size:12px;
+    color:#38d39f;
+    letter-spacing:3px;
+}
+
+.yellow{
+    color:#f3c144;
+}
+
+.amount{
+    margin-top:8px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.yellow-text{
+    color:#ffe08a;
+}
+
+.wallet-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+}
+
+.deposit-btn{
+    flex:1;
+    padding:16px;
+    border:none;
+    border-radius:18px;
+    background:#39e58c;
+    color:#000;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.withdraw-btn{
+    flex:1;
+    padding:16px;
+    border:none;
+    border-radius:18px;
+    background:#1d1d1d;
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* TRANSACTIONS */
+
+.section-title{
+    padding:25px 15px 10px;
+    color:#aaa;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.transaction-card{
+    margin:0 15px;
+    padding:18px 0;
+    border-bottom:1px solid #1f1f1f;
+    display:flex;
+    justify-content:space-between;
+}
+
+.trx-title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.trx-sub{
+    color:#888;
+    margin-top:5px;
+}
+
+.trx-right{
+    text-align:right;
+}
+
+.trx-amount{
+    color:#38ff7b;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.trx-status{
+    margin-top:10px;
+    background:#12391f;
+    color:#2cff74;
+    padding:6px 12px;
+    border-radius:14px;
+    font-size:12px;
+}
+
+/* PROFILE */
+
+.profile-card{
+    margin:25px 15px;
+    background:#101010;
+    border:1px solid #1e1f20;
+    border-radius:22px;
+    overflow:hidden;
+}
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:20px;
+}
+
+.profile-avatar{
+    width:70px;
+    height:70px;
+    border-radius:18px;
+    background:#1a1a1a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+}
+
+.profile-name{
+    font-size:34px;
+    font-weight:bold;
+}
+
+.profile-balance{
+    margin-top:5px;
+    color:#aaa;
+}
+
+.vip-box{
+    border-top:1px solid #1f1f1f;
+    padding:20px;
+}
+
+.vip-label{
+    color:#d7a93e;
+    letter-spacing:3px;
+    font-size:12px;
+}
+
+.vip-title{
+    margin-top:10px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* STATS */
+
+.stats-grid{
+    padding:0 15px 30px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.stat-box{
+    background:#101010;
+    border:1px solid #1f1f1f;
+    border-radius:18px;
+    padding:24px 15px;
+    text-align:center;
+}
+
+.stat-title{
+    color:#888;
+    font-size:13px;
+}
+
+.stat-value{
+    margin-top:15px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.green{
+    color:#39ff83;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    width:390px;
+    background:#111;
+    border-top:1px solid #232728;
+    display:flex;
+    justify-content:space-around;
+    padding:12px 0;
+}
+
+.nav-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:5px;
+    color:#777;
+    font-size:12px;
+}
+
+.nav-item.active{
+    color:#63ff72;
+}
+
+.nav-item i{
+    font-size:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+
+        <div class="logo">
+            <div class="logo-box">KG</div>
+            <div class="logo-text">KalBet</div>
+        </div>
+
+        <div class="balance">
+            1,000.00 ETB
+        </div>
+
+    </div>
+
+    <!-- BANNER -->
+    <div class="banner">
+
+        <div class="circle"></div>
+
+        <h1>KalBet<br>Casino</h1>
+
+        <p>አዳዲስ ጨዋታዎች እና ሽልማቶች</p>
+
+        <div class="gift">🎁</div>
+
+    </div>
+
+    <!-- MENU -->
+    <div class="menu-grid">
+
+        <div class="menu-card">
+            <span>ዕለታዊ ሽልማት</span>
+            <i class="fa-solid fa-gift"></i>
+        </div>
+
+        <div class="menu-card">
+            <span>VIP ክለብ</span>
+            <i class="fa-solid fa-crown"></i>
+        </div>
+
+    </div>
+
+    <!-- GAMES -->
+    <div class="games-title">Popular Games</div>
+
+    <div class="games">
+
+        <div class="game">
+            <img src="https://picsum.photos/200/120?1">
+            <div class="game-info">
+                <div class="game-title">Chicken Road</div>
+                <div class="players">Br 51.9K</div>
             </div>
         </div>
 
-        <div class="balance-box">
-            <div>
+        <div class="game">
+            <img src="https://picsum.photos/200/120?2">
+            <div class="game-info">
+                <div class="game-title">Lucky Spin</div>
+                <div class="players">Br 28.9K</div>
+            </div>
+        </div>
+
+        <div class="game">
+            <img src="https://picsum.photos/200/120?3">
+            <div class="game-info">
+                <div class="game-title">777 Slot</div>
+                <div class="players">Br 61.2K</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- WALLET -->
+    <div class="wallet-page">
+
+        <div class="wallet-card">
+
+            <div class="wallet-top">
+
+                <div class="currency-circle">Br</div>
+
+                <div>
+                    <div class="wallet-label">TOTAL BALANCE</div>
+                    <div class="wallet-balance">
+                        ETB <span>12.30</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="balance-box">
                 <div class="small-title">WITHDRAWABLE</div>
                 <div class="amount">ETB 0.00</div>
             </div>
-        </div>
 
-        <div class="balance-box">
-            <div>
+            <div class="balance-box">
                 <div class="small-title yellow">BONUS BALANCE</div>
                 <div class="amount yellow-text">ETB 12.30</div>
             </div>
+
+            <div class="wallet-buttons">
+                <button class="deposit-btn">Deposit</button>
+                <button class="withdraw-btn">Withdraw</button>
+            </div>
+
         </div>
 
-        <div class="wallet-buttons">
-            <button class="deposit-btn">+ Deposit</button>
-            <button class="withdraw-btn">Withdraw</button>
-        </div>
     </div>
 
-    <!-- Transactions -->
+    <!-- TRANSACTIONS -->
     <div class="section-title">RECENT TRANSACTIONS</div>
 
     <div class="transaction-card">
+
         <div>
             <div class="trx-title">Deposit</div>
             <div class="trx-sub">Provider: CRYPTO_SPIN</div>
@@ -45,41 +585,31 @@
             <div class="trx-amount">+ETB 5.00</div>
             <div class="trx-status">COMPLETED</div>
         </div>
+
     </div>
 
-    <div class="transaction-card">
-        <div>
-            <div class="trx-title">Deposit</div>
-            <div class="trx-sub">Provider: CRYPTO_SPIN</div>
-            <div class="trx-sub">Currency: Br</div>
-        </div>
-
-        <div class="trx-right">
-            <div class="trx-amount">+ETB 5.00</div>
-            <div class="trx-status">COMPLETED</div>
-        </div>
-    </div>
-
-    <!-- Profile -->
+    <!-- PROFILE -->
     <div class="profile-card">
+
         <div class="profile-top">
+
             <div class="profile-avatar">Y</div>
 
             <div>
                 <div class="profile-name">yab</div>
                 <div class="profile-balance">Balance: ••••••</div>
             </div>
+
         </div>
 
         <div class="vip-box">
-            <div>
-                <div class="vip-label">VIP CLUB • LEVEL 0</div>
-                <div class="vip-title">EXPLORER STATUS</div>
-            </div>
+            <div class="vip-label">VIP CLUB • LEVEL 0</div>
+            <div class="vip-title">EXPLORER STATUS</div>
         </div>
+
     </div>
 
-    <!-- Stats -->
+    <!-- STATS -->
     <div class="stats-grid">
 
         <div class="stat-box">
@@ -106,245 +636,35 @@
 
 </div>
 
-<style>
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
 
-body{
-    background:#000;
-    color:white;
-    font-family:Arial,sans-serif;
-}
+    <div class="nav-item active">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </div>
 
-.wallet-page{
-    max-width:390px;
-    margin:auto;
-    padding:15px;
-}
+    <div class="nav-item">
+        <i class="fa-solid fa-gamepad"></i>
+        <span>Games</span>
+    </div>
 
-.wallet-card{
-    background:linear-gradient(135deg,#101010,#111f16);
-    border:1px solid #1f2d25;
-    border-radius:24px;
-    padding:18px;
-    margin-bottom:25px;
-}
+    <div class="nav-item">
+        <i class="fa-solid fa-wallet"></i>
+        <span>Wallet</span>
+    </div>
 
-.wallet-top{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-bottom:20px;
-}
+    <div class="nav-item">
+        <i class="fa-solid fa-crown"></i>
+        <span>VIP</span>
+    </div>
 
-.currency-circle{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    background:#157347;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-    font-size:20px;
-    color:#ffd54a;
-}
+    <div class="nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+    </div>
 
-.wallet-label{
-    color:#888;
-    font-size:12px;
-    letter-spacing:2px;
-}
+</div>
 
-.wallet-balance{
-    font-size:42px;
-    font-weight:bold;
-    margin-top:5px;
-}
-
-.wallet-balance span{
-    color:#43f59b;
-}
-
-.balance-box{
-    background:#141414;
-    border:1px solid #232323;
-    border-radius:24px;
-    padding:18px;
-    margin-top:15px;
-}
-
-.small-title{
-    color:#38d39f;
-    letter-spacing:3px;
-    font-size:12px;
-}
-
-.yellow{
-    color:#f4c542;
-}
-
-.amount{
-    font-size:22px;
-    font-weight:bold;
-    margin-top:8px;
-}
-
-.yellow-text{
-    color:#ffe28a;
-}
-
-.wallet-buttons{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
-
-.deposit-btn{
-    flex:1;
-    background:#39e58c;
-    border:none;
-    color:black;
-    font-weight:bold;
-    font-size:22px;
-    padding:16px;
-    border-radius:18px;
-}
-
-.withdraw-btn{
-    flex:1;
-    background:#1c1c1c;
-    border:none;
-    color:white;
-    font-weight:bold;
-    font-size:22px;
-    padding:16px;
-    border-radius:18px;
-}
-
-.section-title{
-    color:#aaa;
-    font-size:15px;
-    margin-bottom:15px;
-    font-weight:bold;
-}
-
-.transaction-card{
-    display:flex;
-    justify-content:space-between;
-    background:#0d0d0d;
-    border-bottom:1px solid #1d1d1d;
-    padding:18px 0;
-}
-
-.trx-title{
-    font-size:18px;
-    font-weight:bold;
-}
-
-.trx-sub{
-    color:#9a9a9a;
-    margin-top:5px;
-}
-
-.trx-right{
-    text-align:right;
-}
-
-.trx-amount{
-    color:#35f27f;
-    font-size:26px;
-    font-weight:bold;
-}
-
-.trx-status{
-    margin-top:10px;
-    background:#12391f;
-    color:#2cff74;
-    padding:6px 12px;
-    border-radius:14px;
-    font-size:13px;
-}
-
-.profile-card{
-    margin-top:30px;
-    background:#0d0d0d;
-    border:1px solid #1f1f1f;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.profile-top{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:20px;
-}
-
-.profile-avatar{
-    width:70px;
-    height:70px;
-    border-radius:18px;
-    background:#181818;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:30px;
-}
-
-.profile-name{
-    font-size:38px;
-    font-weight:bold;
-}
-
-.profile-balance{
-    color:#aaa;
-    margin-top:5px;
-}
-
-.vip-box{
-    border-top:1px solid #222;
-    padding:20px;
-}
-
-.vip-label{
-    color:#d4a53d;
-    letter-spacing:3px;
-    font-size:12px;
-}
-
-.vip-title{
-    margin-top:10px;
-    font-size:30px;
-    font-weight:bold;
-}
-
-.stats-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-    margin-top:25px;
-}
-
-.stat-box{
-    background:#0d0d0d;
-    border:1px solid #222;
-    border-radius:16px;
-    padding:25px 15px;
-    text-align:center;
-}
-
-.stat-title{
-    color:#888;
-    font-size:13px;
-}
-
-.stat-value{
-    margin-top:15px;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.green{
-    color:#35f27f;
-}
-
-</style>
+</body>
+</html>
