@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KalBet Full UI</title>
+<title>KalBet - Pro UI</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -32,10 +32,10 @@ body{
     border:1px solid #1e1f20;
     position:relative;
     padding-bottom:90px;
-    min-height: 700px;
+    min-height: 720px;
 }
 
-/* 🔄 TAB SYSTEM: ገጾችን ለመቀያየር */
+/* 🔄 TAB SYSTEM */
 .page {
     display: none;
 }
@@ -159,7 +159,7 @@ body{
     font-size:24px;
 }
 
-/* GAMES */
+/* 🎮 GAMES GRID (ልክ እንደ ምስሉ በተርታ) */
 .games-title{
     padding:20px 15px 10px;
     font-size:18px;
@@ -169,52 +169,71 @@ body{
 .games{
     padding:0 15px;
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
+    grid-template-columns:repeat(3, 1fr);
+    gap:10px;
 }
 
 .game{
     background:#17191b;
-    border-radius:16px;
+    border-radius:14px;
     overflow:hidden;
     border:1px solid #232728;
     cursor: pointer;
-    transition: 0.2s;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
 }
 .game:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
 }
 
+.game-img-box {
+    width: 100%;
+    height: 85px;
+    background: #232728;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    position: relative;
+}
+
+/* ጨዋታዎችን በምስል ለመተካት ሲፈለግ ለመጠቀም */
 .game img{
     width:100%;
-    height:90px;
+    height:85px;
     object-fit:cover;
 }
 
 .game-info{
-    padding:8px;
+    padding:8px 6px;
+    text-align: center;
 }
 
 .game-title{
-    font-size:13px;
+    font-size:11px;
     font-weight:bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .players{
-    margin-top:5px;
+    margin-top:4px;
     color:#63ff72;
-    font-size:12px;
+    font-size:10px;
+    font-weight: bold;
 }
 
-/* 🎡 የዕድለኛ ስፒን ዲዛይን (በጨዋታዎች ገጽ ላይ የሚከፈት) */
+/* 🎡 ዕድለኛ ስፒን ማሽን */
 .spin-container {
     padding: 15px;
     text-align: center;
 }
 .wheel-wrapper {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     margin: 20px auto;
 }
 .wheel {
@@ -238,11 +257,12 @@ body{
     background: #63ff72;
     color: #000;
     border: none;
-    padding: 12px 30px;
+    padding: 14px 40px;
     font-weight: bold;
     border-radius: 12px;
     cursor: pointer;
-    margin-top: 10px;
+    font-size: 16px;
+    margin-top: 15px;
 }
 
 /* WALLET */
@@ -350,14 +370,14 @@ body{
     cursor: pointer;
 }
 
-/* 🏦 WITHDRAW FORM (ልክ እንደ Cassa ዲዛይን) */
+/* 🏦 WITHDRAW FORM */
 .withdraw-form-box {
     margin-top: 20px;
     background: #111;
     border: 1px solid #222;
     padding: 15px;
     border-radius: 18px;
-    display: none; /* በተኑ ሲነካ ብቻ ይከፈታል */
+    display: none;
 }
 .w-input-group {
     margin-bottom: 12px;
@@ -584,25 +604,75 @@ body{
 
         <div class="games-title">Popular Games</div>
         <div class="games">
-            <div class="game" onclick="alert('Chicken Road ጨዋታ በመጫን ላይ...')">
-                <img src="https://picsum.photos/200/120?1">
+            <div class="game" onclick="playGame('Aviator')">
+                <div class="game-img-box" style="background: #1a0f12; color: #ff3344;">🚀</div>
+                <div class="game-info">
+                    <div class="game-title">Aviator</div>
+                    <div class="players">Br 84.2K</div>
+                </div>
+            </div>
+
+            <div class="game" onclick="playGame('Keno')">
+                <div class="game-img-box" style="background: #0f172a; color: #38bdf8;">🎱</div>
+                <div class="game-info">
+                    <div class="game-title">Keno</div>
+                    <div class="players">Br 32.1K</div>
+                </div>
+            </div>
+
+            <div class="game" onclick="playGame('Chicken Road')">
+                <div class="game-img-box" style="background: #1c1917; color: #eab308;">🐔</div>
                 <div class="game-info">
                     <div class="game-title">Chicken Road</div>
                     <div class="players">Br 51.9K</div>
                 </div>
             </div>
+
+            <div class="game" onclick="playGame('Mines')">
+                <div class="game-img-box" style="background: #091e14; color: #22c55e;">💎</div>
+                <div class="game-info">
+                    <div class="game-title">Mines</div>
+                    <div class="players">Br 45.6K</div>
+                </div>
+            </div>
+
+            <div class="game" onclick="playGame('Zingo')">
+                <div class="game-img-box" style="background: #2e1065; color: #a855f7;">🎲</div>
+                <div class="game-info">
+                    <div class="game-title">Zingo</div>
+                    <div class="players">Br 19.4K</div>
+                </div>
+            </div>
+
             <div class="game" onclick="switchTab('games')">
-                <img src="https://picsum.photos/200/120?2">
+                <div class="game-img-box" style="background: #111; color: #63ff72;">🎡</div>
                 <div class="game-info">
                     <div class="game-title">Lucky Spin</div>
                     <div class="players">Br 28.9K</div>
                 </div>
             </div>
-            <div class="game" onclick="alert('777 Slot ጨዋታ በመጫን ላይ...')">
-                <img src="https://picsum.photos/200/120?3">
+
+            <div class="game" onclick="playGame('777 Slot')">
+                <div class="game-img-box" style="background: #450a0a; color: #f43f5e;">🎰</div>
                 <div class="game-info">
                     <div class="game-title">777 Slot</div>
                     <div class="players">Br 61.2K</div>
+                </div>
+            </div>
+
+            <div class="game" onclick="playGame('Dice')">
+                <div class="game-img-box" style="background: #1e293b; color: #94a3b8;">⚄</div>
+                <div class="game-info">
+                    <div class="game-title">Dice</div>
+                    <div class="players">Br 14.8K</div>
+                </div>
+            </div>
+
+            <div class="game" onclick="playGame('Plinko')">
+                <div class="game-img-box" style="background: #062f4f; color: #ff7b25;">🔺</div>
+                <div class="game-info">
+                    <div class="game-title">Plinko</div>
+                    <div class="players">Br 22.3K</div>
                 </div>
             </div>
         </div>
@@ -666,18 +736,6 @@ body{
                 <button class="w-submit-btn" onclick="processWithdraw()">ጥያቄ ላክ</button>
             </div>
         </div>
-
-        <div class="section-title">RECENT TRANSACTIONS</div>
-        <div class="transaction-card">
-            <div>
-                <div class="trx-title">Welcome Bonus</div>
-                <div class="trx-sub">Provider: SYSTEM</div>
-            </div>
-            <div class="trx-right">
-                <div class="trx-amount" style="color:#63ff72;">+ETB 1000</div>
-                <div class="trx-status">COMPLETED</div>
-            </div>
-        </div>
     </div>
 
     <div id="page-vip" class="page">
@@ -698,25 +756,6 @@ body{
                     <div class="profile-name">yab</div>
                     <div class="profile-balance">User ID: #82731</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-box">
-                <div class="stat-title">TOTAL BETS</div>
-                <div class="stat-value">13</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-title">HIGHEST WIN</div>
-                <div class="stat-value green">ETB 11.88</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-title">MOST PLAYED</div>
-                <div class="stat-value">Aviator</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-title">WAGERED</div>
-                <div class="stat-value green">ETB 151.00</div>
             </div>
         </div>
     </div>
@@ -747,7 +786,6 @@ body{
 </div>
 
 <script>
-// 💰 ማዕከላዊ የባላንስ መቆጣጠሪያ
 let mainBalance = 1000.00;
 let bonusBalance = 0.00;
 
@@ -758,84 +796,75 @@ function updateUI() {
     document.getElementById('bonus-bal').innerText = "ETB " + bonusBalance.toFixed(2);
 }
 
-// 🔄 ገጾችን መቀያየሪያ ተግባር
 function switchTab(pageId, element) {
-    // ሁሉንም ገጽ ደብቅ
     document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-    // የተመረጠውን ገጽ አሳይ
     document.getElementById('page-' + pageId).classList.add('active');
     
-    // የበተን ምልክቶችን አዘምን
     if(element) {
         document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         element.classList.add('active');
     }
 }
 
-// 🎡 የስፒን ማሽከርከሪያ ሲስተም
+// የጨዋታ መክፈቻ ሲስተም ጥሪ
+function playGame(gameName) {
+    alert(`🎮 ${gameName} ጨዋታ በተሳካ ሁኔታ እየተጫነ ነው...`);
+}
+
+// 🎡 ስፒን ማሽን
 let isSpinning = false;
 function startSpin() {
     if(isSpinning) return;
     isSpinning = true;
     
     const wheel = document.getElementById('wheel');
-    const randomDeg = Math.floor(Math.random() * 360) + 1800; // 5 ዙር ይዞራል
+    const randomDeg = Math.floor(Math.random() * 360) + 1800;
     wheel.style.transform = `rotate(${randomDeg}deg)`;
     
     setTimeout(() => {
         isSpinning = false;
-        const prizeList = [20, 50, 0, 10, 100, 5];
+        const prizeList = [10, 50, 0, 20, 100, 0];
         const wonAmt = prizeList[Math.floor(Math.random() * prizeList.length)];
         
         if(wonAmt > 0) {
             bonusBalance += wonAmt;
             alert(`🎉 እንኳን ደስ አለዎት! ${wonAmt} ብር ቦነስ አሸንፈዋል!`);
         } else {
-            alert(`❌ ይቅርታ! በዚህ ዙር ምንም አልወጣልዎትም፤ እንደገና ይሞክሩ።`);
+            alert(`❌ በዚህ ዙር አልወጣልዎትም፤ እንደገና ይሞክሩ።`);
         }
         updateUI();
     }, 4000);
 }
 
-// 🎟️ የኩፖን ሲስተም
 function openCouponPrompt() {
     let code = prompt("የኩፖን ኮድዎን ያስገቡ:");
     if(code && code.toUpperCase() === "KALBET50") {
         bonusBalance += 50;
-        alert("🎉 ኮዱ ትክክል ነው! 50 ብር ቦነስ ተጨምሮልዎታል!");
+        alert("🎉 50 ብር ቦነስ ተጨምሯል!");
         updateUI();
     } else if(code) {
-        alert("❌ የተሳሳተ ወይም ጊዜው ያለፈበት ኮድ ነው!");
+        alert("❌ የተሳሳተ ኮድ!");
     }
 }
 
-// 🏦 የዊዝድሮው ፎርም መክፈቻ
 function toggleWithdrawForm() {
     const box = document.getElementById('withdraw-box');
     box.style.display = (box.style.display === "block") ? "none" : "block";
 }
 
-// 💸 የብር ማውጫ ተግባር
 function processWithdraw() {
     const acc = document.getElementById('w-account').value.trim();
     const amt = parseFloat(document.getElementById('w-amount').value);
     
-    if(!acc) { alert("⚠️ እባክዎን አካውንት ያስገቡ!"); return; }
-    if(isNaN(amt) || amt <= 0) { alert("⚠️ ትክክለኛ የብር መጠን ያስገቡ!"); return; }
+    if(!acc || isNaN(amt) || amt <= 0) { alert("⚠️ መረጃ በትክክል ያስገቡ!"); return; }
+    if(amt > mainBalance) { alert("⚠️ በቂ ሂሳብ የሎትም!"); return; }
     
-    if(amt > mainBalance) {
-        alert("⚠️ በቂ ሊወጣ የሚችል ቀሪ ሂሳብ የሎትም!");
-    } else {
-        mainBalance -= amt;
-        alert(`✅ ጥያቄዎ በተሳካ ሁኔታ ተልኳል!\nመጠን: ${amt} ETB\nቁጥር: ${acc}`);
-        document.getElementById('w-account').value = "";
-        document.getElementById('w-amount').value = "";
-        toggleWithdrawForm();
-        updateUI();
-    }
+    mainBalance -= amt;
+    alert(`✅ ጥያቄዎ ተልኳል! መጠን: ${amt} ETB`);
+    toggleWithdrawForm();
+    updateUI();
 }
 
-// መጀመሪያ ገጹ ሲከፈት ባላንሱን ያድስ
 updateUI();
 </script>
 
