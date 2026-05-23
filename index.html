@@ -2,7 +2,7 @@
 <html lang="am">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>KalBet - Pro UI with iframe Games</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -16,7 +16,7 @@ html {
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family: Arial, sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -25,20 +25,19 @@ body{
     color:white;
     display:flex;
     justify-content:center;
-    padding:20px 0;
+    padding:0;
     overflow-x: hidden;
 }
 
 .app{
     width: 100%;
     max-width: 390px;
-    background:#0d0f10;
-    border-radius:24px;
-    overflow:hidden;
-    border:1px solid #1e1f20;
+    background:#0b0d0e;
+    min-height: 100vh;
     position:relative;
-    padding-bottom:90px;
-    min-height: 720px;
+    padding-bottom:95px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* 🔄 TAB SYSTEM */
@@ -54,12 +53,12 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:15px;
-    background:#111;
+    padding:12px 15px;
+    background:#111416;
     position: sticky;
     top: 0;
-    z-index: 10;
-    border-bottom: 1px solid #1e1f20;
+    z-index: 100;
+    border-bottom: 1px solid #1c2225;
 }
 
 .logo{
@@ -69,82 +68,89 @@ body{
 }
 
 .logo-box{
-    width:40px;
-    height:40px;
-    border-radius:12px;
+    width:36px;
+    height:36px;
+    border-radius:10px;
     background:linear-gradient(180deg,#67ff7b,#149c3b);
     display:flex;
     align-items:center;
     justify-content:center;
     color:#111;
-    font-weight:bold;
+    font-weight:900;
+    font-size: 15px;
 }
 
 .logo-text{
-    font-size:24px;
+    font-size:20px;
     font-weight:900;
     color:#63ff72;
 }
 
 .balance{
-    background:#181b1d;
-    border:1px solid #2a3133;
-    padding:10px 14px;
-    border-radius:12px;
+    background:#161b1e;
+    border:1px solid #252f33;
+    padding:8px 12px;
+    border-radius:10px;
     font-weight:bold;
+    font-size: 13px;
     color: #39e58c;
 }
 
 /* BANNER */
 .banner{
     margin:15px;
-    border-radius:20px;
-    background:linear-gradient(135deg,#103a13,#39d353);
+    border-radius:16px;
+    background:linear-gradient(135deg,#0a270f,#1e7731);
+    border: 1px solid #27993f;
     padding:20px;
     position:relative;
     overflow:hidden;
+    box-shadow: 0 4px 15px rgba(20, 156, 59, 0.2);
 }
 
 .banner h1{
-    font-size:34px;
-    line-height:1.1;
+    font-size:24px;
+    line-height:1.2;
+    font-weight: 800;
 }
 
 .banner p{
-    margin-top:10px;
+    margin-top:6px;
+    font-size: 13px;
     color:#d9ffdf;
 }
 
 .circle{
     position:absolute;
-    right:-30px;
-    top:10px;
-    width:180px;
-    height:180px;
+    right:-20px;
+    top:-20px;
+    width:130px;
+    height:130px;
     border-radius:50%;
-    background:rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.06);
 }
 
 .gift{
     position:absolute;
-    right:25px;
+    right:20px;
     bottom:10px;
-    font-size:60px;
+    font-size:45px;
 }
 
 /* MENU */
 .menu-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:12px;
+    gap:10px;
     padding:0 15px;
+    margin-bottom: 10px;
 }
 
 .menu-card{
-    background:#151718;
-    border:1px solid #242829;
-    border-radius:16px;
-    padding:18px;
+    background:#121619;
+    border:1px solid #1f272b;
+    border-radius:14px;
+    padding:15px;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -156,20 +162,24 @@ body{
 }
 
 .menu-card span{
-    font-size:14px;
+    font-size:13px;
     font-weight:bold;
+    color: #e2e8f0;
 }
 
 .menu-card i{
     color:#63ff72;
-    font-size:24px;
+    font-size:20px;
 }
 
 /* 🎮 GAMES GRID */
 .games-title{
-    padding:20px 15px 10px;
-    font-size:18px;
+    padding:15px 15px 8px;
+    font-size:15px;
     font-weight:bold;
+    color: #718096;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .games{
@@ -180,46 +190,59 @@ body{
 }
 
 .game{
-    background:#17191b;
-    border-radius:14px;
+    background: linear-gradient(180deg, #161b1e 0%, #101416 100%);
+    border-radius:16px;
     overflow:hidden;
-    border:1px solid #232728;
+    border:1px solid #222c31;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, border-color 0.2s;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
+
 .game:active {
-    transform: scale(0.95);
+    transform: scale(0.94);
+    border-color: #39e58c;
 }
 
 .game-img-box {
     width: 100%;
-    height: 85px;
-    background: #232728;
+    height: 100px;
+    overflow: hidden;
+    background: #111;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
     position: relative;
+    border-bottom: 1px solid #1c2428;
+}
+
+.game-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .game-info{
-    padding:8px 6px;
+    padding:8px 4px;
     text-align: center;
+    background: #0d1012;
 }
 
 .game-title{
     font-size:11px;
-    font-weight:bold;
+    font-weight:700;
+    color: #fff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .players{
-    margin-top:4px;
-    color:#63ff72;
+    margin-top:3px;
+    color:#39e58c;
     font-size:10px;
     font-weight: bold;
 }
@@ -253,26 +276,27 @@ body{
     z-index: 5;
 }
 .spin-btn {
-    background: #63ff72;
+    background: linear-gradient(180deg, #63ff72, #149c3b);
     color: #000;
     border: none;
-    padding: 14px 40px;
+    padding: 12px 40px;
     font-weight: bold;
     border-radius: 12px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
     margin-top: 15px;
+    box-shadow: 0 4px 12px rgba(99, 255, 114, 0.3);
 }
 
 /* WALLET */
 .wallet-page{
-    padding:20px 15px;
+    padding:15px;
 }
 
 .wallet-card{
-    background:linear-gradient(135deg,#101010,#132117);
-    border:1px solid #203025;
-    border-radius:24px;
+    background:linear-gradient(135deg,#0e1214,#0e2716);
+    border:1px solid #1a3c23;
+    border-radius:20px;
     padding:20px;
 }
 
@@ -283,8 +307,8 @@ body{
 }
 
 .currency-circle{
-    width:60px;
-    height:60px;
+    width:50px;
+    height:50px;
     border-radius:50%;
     background:#157347;
     display:flex;
@@ -292,37 +316,37 @@ body{
     justify-content:center;
     color:#ffd54a;
     font-weight:bold;
-    font-size:22px;
+    font-size:20px;
 }
 
 .wallet-label{
-    color:#888;
-    font-size:12px;
-    letter-spacing:2px;
+    color:#a0aec0;
+    font-size:11px;
+    letter-spacing:1px;
 }
 
 .wallet-balance{
-    font-size:42px;
+    font-size:32px;
     font-weight:bold;
-    margin-top:5px;
+    margin-top:3px;
 }
 
 .wallet-balance span{
-    color:#43f59b;
+    color:#39e58c;
 }
 
 .balance-box{
-    margin-top:15px;
-    background:#141414;
-    border:1px solid #222;
-    border-radius:22px;
-    padding:18px;
+    margin-top:12px;
+    background:#080a0b;
+    border:1px solid #1a2225;
+    border-radius:16px;
+    padding:15px;
 }
 
 .small-title{
-    font-size:12px;
+    font-size:11px;
     color:#38d39f;
-    letter-spacing:3px;
+    letter-spacing:1.5px;
 }
 
 .yellow{
@@ -330,8 +354,8 @@ body{
 }
 
 .amount{
-    margin-top:8px;
-    font-size:24px;
+    margin-top:5px;
+    font-size:20px;
     font-weight:bold;
 }
 
@@ -342,40 +366,41 @@ body{
 .wallet-buttons{
     display:flex;
     gap:10px;
-    margin-top:18px;
+    margin-top:15px;
 }
 
 .deposit-btn{
     flex:1;
-    padding:16px;
+    padding:14px;
     border:none;
-    border-radius:18px;
+    border-radius:14px;
     background:#39e58c;
     color:#000;
-    font-size:18px;
+    font-size:16px;
     font-weight:bold;
     cursor: pointer;
 }
 
 .withdraw-btn{
     flex:1;
-    padding:16px;
+    padding:14px;
     border:none;
-    border-radius:18px;
-    background:#1d1d1d;
+    border-radius:14px;
+    background:#1a2225;
     color:#fff;
-    font-size:18px;
+    font-size:16px;
     font-weight:bold;
     cursor: pointer;
+    border: 1px solid #2a353a;
 }
 
 /* 🏦 WITHDRAW FORM */
 .withdraw-form-box {
-    margin-top: 20px;
-    background: #111;
-    border: 1px solid #222;
+    margin-top: 15px;
+    background: #111416;
+    border: 1px solid #222c31;
     padding: 15px;
-    border-radius: 18px;
+    border-radius: 16px;
     display: none;
 }
 .w-input-group {
@@ -384,13 +409,13 @@ body{
 .w-input-group label {
     display: block;
     font-size: 12px;
-    color: #aaa;
+    color: #a0aec0;
     margin-bottom: 5px;
 }
 .w-input-group input, .w-input-group select {
     width: 100%;
-    background: #17191b;
-    border: 1px solid #232728;
+    background: #080a0b;
+    border: 1px solid #222c31;
     padding: 12px;
     border-radius: 10px;
     color: white;
@@ -398,7 +423,7 @@ body{
 }
 .w-submit-btn {
     width: 100%;
-    background: #39e58c;
+    background: linear-gradient(180deg, #39e58c, #149c3b);
     color: #000;
     border: none;
     padding: 14px;
@@ -409,10 +434,10 @@ body{
 
 /* PROFILE */
 .profile-card{
-    margin:25px 15px;
-    background:#101010;
-    border:1px solid #1e1f20;
-    border-radius:22px;
+    margin:15px;
+    background:#111416;
+    border:1px solid #222c31;
+    border-radius:20px;
     overflow:hidden;
 }
 
@@ -424,50 +449,54 @@ body{
 }
 
 .profile-avatar{
-    width:70px;
-    height:70px;
-    border-radius:18px;
-    background:#1a1a1a;
+    width:60px;
+    height:60px;
+    border-radius:14px;
+    background:#222c31;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:30px;
+    font-size:26px;
+    font-weight: bold;
+    color: #39e58c;
 }
 
 .profile-name{
-    font-size:34px;
+    font-size:26px;
     font-weight:bold;
+}
+
+.profile-balance {
+    font-size: 12px;
+    color: #a0aec0;
+    margin-top: 2px;
 }
 
 /* STATS */
 .stats-grid{
-    padding:0 15px 30px;
+    padding:0 15px 20px;
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:15px;
+    gap:12px;
 }
 
 .stat-box{
-    background:#101010;
-    border:1px solid #1f1f1f;
-    border-radius:18px;
-    padding:24px 15px;
+    background:#111416;
+    border:1px solid #222c31;
+    border-radius:16px;
+    padding:20px 10px;
     text-align:center;
 }
 
 .stat-title{
-    color:#888;
-    font-size:13px;
+    color:#718096;
+    font-size:12px;
 }
 
 .stat-value{
-    margin-top:15px;
-    font-size:28px;
+    margin-top:10px;
+    font-size:22px;
     font-weight:bold;
-}
-
-.green{
-    color:#39ff83;
 }
 
 /* BOTTOM NAV */
@@ -476,11 +505,11 @@ body{
     bottom:0;
     width:100%;
     max-width:390px;
-    background:#111;
-    border-top:1px solid #232728;
+    background:#111416;
+    border-top:1px solid #222c31;
     display:flex;
     justify-content:space-around;
-    padding:12px 0;
+    padding:12px 0 16px 0;
     z-index: 100;
 }
 
@@ -489,9 +518,10 @@ body{
     flex-direction:column;
     align-items:center;
     gap:5px;
-    color:#777;
-    font-size:12px;
+    color:#718096;
+    font-size:11px;
     cursor: pointer;
+    flex: 1;
 }
 
 .nav-item.active{
@@ -538,7 +568,9 @@ body{
         <div class="games-title">Popular Games</div>
         <div class="games">
             <div class="game" onclick="openGame('Aviator', 'games/aviator.html')">
-                <div class="game-img-box" style="background: #1a0f12; color: #ff3344;">🚀</div>
+                <div class="game-img-box">
+                    <img src="images/aviator.jpg" alt="Aviator">
+                </div>
                 <div class="game-info">
                     <div class="game-title">Aviator</div>
                     <div class="players">Br 84.2K</div>
@@ -546,7 +578,9 @@ body{
             </div>
 
             <div class="game" onclick="openGame('Keno', 'games/keno.html')">
-                <div class="game-img-box" style="background: #0f172a; color: #38bdf8;">🎱</div>
+                <div class="game-img-box">
+                    <img src="images/keno.jpg" alt="Keno">
+                </div>
                 <div class="game-info">
                     <div class="game-title">Keno</div>
                     <div class="players">Br 32.1K</div>
@@ -554,7 +588,9 @@ body{
             </div>
 
             <div class="game" onclick="openGame('Chicken Road', 'games/chicken.html')">
-                <div class="game-img-box" style="background: #1c1917; color: #eab308;">🐔</div>
+                <div class="game-img-box">
+                    <img src="images/chicken-road.jpg" alt="Chicken Road">
+                </div>
                 <div class="game-info">
                     <div class="game-title">Chicken Road</div>
                     <div class="players">Br 51.9K</div>
@@ -562,7 +598,9 @@ body{
             </div>
 
             <div class="game" onclick="openGame('Mines', 'games/mines.html')">
-                <div class="game-img-box" style="background: #091e14; color: #22c55e;">💎</div>
+                <div class="game-img-box">
+                    <img src="images/mines.jpg" alt="Mines">
+                </div>
                 <div class="game-info">
                     <div class="game-title">Mines</div>
                     <div class="players">Br 45.6K</div>
@@ -570,7 +608,9 @@ body{
             </div>
 
             <div class="game" onclick="openGame('Zingo', 'games/zingo.html')">
-                <div class="game-img-box" style="background: #2e1065; color: #a855f7;">🎲</div>
+                <div class="game-img-box">
+                    <img src="images/zingo.jpg" alt="Zingo">
+                </div>
                 <div class="game-info">
                     <div class="game-title">Zingo</div>
                     <div class="players">Br 19.4K</div>
@@ -578,7 +618,9 @@ body{
             </div>
 
             <div class="game" onclick="switchTab('games')">
-                <div class="game-img-box" style="background: #111; color: #63ff72;">🎡</div>
+                <div class="game-img-box">
+                    <img src="images/luckyspin.jpg" alt="Lucky Spin">
+                </div>
                 <div class="game-info">
                     <div class="game-title">Lucky Spin</div>
                     <div class="players">Br 28.9K</div>
@@ -588,7 +630,7 @@ body{
     </div>
 
     <div id="page-games" class="page">
-        <div class="games-title" style="text-align:center;">🎡 ዕድለኛ ስፒን ማሽን</div>
+        <div class="games-title" style="text-align:center; margin-top: 15px;">🎡 ዕድለኛ ስፒን ማሽን</div>
         <div class="spin-container">
             <div class="wheel-wrapper">
                 <div class="pointer">▼</div>
@@ -650,9 +692,9 @@ body{
     <div id="page-vip" class="page">
         <div class="profile-card">
             <div class="vip-box" style="border:none; padding:20px;">
-                <div class="vip-label">VIP CLUB • LEVEL 1</div>
-                <div class="vip-title" style="color:#63ff72;">PRO EXPLORER</div>
-                <p style="color:#888; font-size:14px; margin-top:10px;">በቀጣይ ጨዋታዎች ላይ የ 5% ተጨማሪ ቦነስ ያገኛሉ!</p>
+                <div class="vip-label" style="font-size: 12px; color: #a0aec0; letter-spacing: 1px;">VIP CLUB • LEVEL 1</div>
+                <div class="vip-title" style="color:#63ff72; font-size: 28px; font-weight: 900; margin-top: 5px;">PRO EXPLORER</div>
+                <p style="color:#a0aec0; font-size:14px; margin-top:10px; line-height: 1.4;">በቀጣይ ጨዋታዎች ላይ የ 5% ተጨማሪ ቦነስ ያገኛሉ!</p>
             </div>
         </div>
     </div>
@@ -675,59 +717,20 @@ body{
             </div>
             <div class="stat-box">
                 <div class="stat-title">HIGHEST WIN</div>
-                <div class="stat-value green">ETB 11.88</div>
+                <div class="stat-value green" style="color: #39e58c;">ETB 11.88</div>
             </div>
         </div>
     </div>
 
 </div>
 
-<div id="gameModal" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#000;
-z-index:9999;
-flex-direction:column;
-">
-
-    <div style="
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px;
-    background:#111;
-    border-bottom:1px solid #222;
-    ">
+<div id="gameModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:9999; flex-direction:column;">
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; background:#111; border-bottom:1px solid #222;">
         <h3 id="gameTitle">Game</h3>
-
-        <button onclick="closeGame()" style="
-        background:red;
-        color:white;
-        border:none;
-        padding:10px 15px;
-        border-radius:10px;
-        font-weight:bold;
-        ">
-            X
-        </button>
+        <button onclick="closeGame()" style="background:#ff3344; color:white; border:none; padding:8px 14px; border-radius:8px; font-weight:bold; cursor: pointer;">X</button>
     </div>
-
-    <iframe id="gameFrame"
-    src=""
-    style="
-    flex:1;
-    width:100%;
-    border:none;
-    background:#000;
-    ">
-    </iframe>
-
+    <iframe id="gameFrame" src="" style="flex:1; width:100%; border:none; background:#000;"></iframe>
 </div>
-
 
 <div class="bottom-nav">
     <div class="nav-item active" onclick="switchTab('home')">
@@ -775,7 +778,6 @@ function switchTab(pageId) {
     }
 }
 
-/* 🛠️ ያንተ አዲስ የጃቫስክሪፕት ፈንክሽኖች ሙሉ በሙሉ እዚህ ገብተዋል */
 function openGame(gameName, gameUrl){
     document.getElementById("gameTitle").innerText = gameName;
     document.getElementById("gameFrame").src = gameUrl;
