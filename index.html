@@ -206,10 +206,9 @@ body{
     border-color: #39e58c;
 }
 
-/* 🖼️ የጌም ምስል ሳጥን ማስተካከያ */
 .game-img-box {
     width: 100%;
-    height: 120px; /* ምስሉ በተገቢው ቁመት እንዲታይ */
+    height: 120px;
     overflow: hidden;
     background: #111;
     display: flex;
@@ -222,7 +221,7 @@ body{
 .game-img-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* ምስሉ ሳይጨፈለቅ ሳጥኑን ሙሉ እንዲሞላ ያደርጋል */
+    object-fit: cover;
     display: block;
 }
 
@@ -685,9 +684,6 @@ body{
                     <label>የብር መጠን</label>
                     <input type="number" id="w-amount" placeholder="0.00">
                 </div>
-                <div class="w-input-group" style="display: none;">
-                   <span style="font-size: 28px; display: flex; align-items: center; justify-content: center;"></span>
-                </div>
                 <button class="w-submit-btn" onclick="processWithdraw()">ጥያቄ ላክ</button>
             </div>
         </div>
@@ -760,16 +756,36 @@ body{
 </div>
 
 <script>
+// 💰 INITIAL BALANCE SETUP
 let mainBalance = 1000.00;
 let bonusBalance = 0.00;
 
+// LOAD SAVED BALANCE WHEN PAGE LOADS
+window.onload = function(){
+    const savedBal = localStorage.getItem('kalbet_balance');
+    if(savedBal){
+        mainBalance = parseFloat(savedBal);
+    }
+    updateUI();
+}
+
+// 🔊 SOUND EFFECTS
+function playClick(){
+    const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
+    audio.volume = 0.3;
+    audio.play().catch(e => console.log("Audio play blocked until user interaction"));
+}
+
+// 📊 UPDATE UI & SAVE BALANCE
 function updateUI() {
     document.getElementById('top-balance').innerText = mainBalance.toFixed(2) + " ETB";
     document.getElementById('wallet-total-bal').innerText = (mainBalance + bonusBalance).toFixed(2);
     document.getElementById('withdrawable-bal').innerText = "ETB " + mainBalance.toFixed(2);
     document.getElementById('bonus-bal').innerText = "ETB " + bonusBalance.toFixed(2);
+    localStorage.setItem('kalbet_balance', mainBalance);
 }
 
+// 🔄 SWITCH TABS
 function switchTab(pageId) {
     document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
     document.getElementById('page-' + pageId).classList.add('active');
@@ -782,18 +798,21 @@ function switchTab(pageId) {
     }
 }
 
+// 🎮 OPEN GAME IN MODAL (IFRAME)
 function openGame(gameName, gameUrl){
+    playClick();
     document.getElementById("gameTitle").innerText = gameName;
     document.getElementById("gameFrame").src = gameUrl;
     document.getElementById("gameModal").style.display = "flex";
 }
 
-function closeGame(){
+// ❌ CLOSE GAME MODAL
+function closeGame()){
     document.getElementById("gameModal").style.display = "none";
     document.getElementById("gameFrame").src = "";
 }
 
-// 🎡 ስፒን ማሽን
+// 🎡 SPIN GAME SYSTEM
 let isSpinning = false;
 function startSpin() {
     if(isSpinning) return;
@@ -805,14 +824,14 @@ function startSpin() {
     
     setTimeout(() => {
         isSpinning = false;
-        const prizeList = [10, 50, 0, 20, 100, 0];
+        const prizeList = [0, 10, 20, 50, 100];
         const wonAmt = prizeList[Math.floor(Math.random() * prizeList.length)];
         
         if(wonAmt > 0) {
             bonusBalance += wonAmt;
-            alert(`🎉 እንኳን ደስ አለዎት! ${wonAmt} ብር ቦነስ ያገኙ!`);
+            alert(`🎉 ${wonAmt} ETB አሸንፈዋል!`);
         } else {
-            alert(`❌ በዚህ ዙር አልወጣልዎትም፤ እንደገና ይሞክሩ።`);
+            alert('😢 አልተሳካም! እንደገና ይሞክሩ።');
         }
         updateUI();
     }, 4000);
@@ -834,6 +853,7 @@ function toggleWithdrawForm() {
     box.style.display = (box.style.display === "block") ? "none" : "block";
 }
 
+// 🏦 WITHDRAW PROCESS
 function processWithdraw() {
     const acc = document.getElementById('w-account').value.trim();
     const amt = parseFloat(document.getElementById('w-amount').value);
@@ -842,12 +862,10 @@ function processWithdraw() {
     if(amt > mainBalance) { alert("⚠️ በቂ ሂሳብ የሎትም!"); return; }
     
     mainBalance -= amt;
-    alert(`✅ ጥያቄዎ ተልኳል! መጠን: ${amt} ETB`);
+    alert(`✅ ${amt} ETB ተቀንሷል!`);
     toggleWithdrawForm();
     updateUI();
 }
-
-updateUI();
 </script>
 
 </body>
