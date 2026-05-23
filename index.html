@@ -206,9 +206,10 @@ body{
     border-color: #39e58c;
 }
 
+/* 🖼️ የጌም ምስል ሳጥን ማስተካከያ */
 .game-img-box {
     width: 100%;
-    height: 100px;
+    height: 120px; /* ምስሉ በተገቢው ቁመት እንዲታይ */
     overflow: hidden;
     background: #111;
     display: flex;
@@ -221,7 +222,7 @@ body{
 .game-img-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* ምስሉ ሳይጨፈለቅ ሳጥኑን ሙሉ እንዲሞላ ያደርጋል */
     display: block;
 }
 
@@ -683,6 +684,9 @@ body{
                 <div class="w-input-group">
                     <label>የብር መጠን</label>
                     <input type="number" id="w-amount" placeholder="0.00">
+                </div>
+                <div class="w-input-group" style="display: none;">
+                   <span style="font-size: 28px; display: flex; align-items: center; justify-content: center;"></span>
                 </div>
                 <button class="w-submit-btn" onclick="processWithdraw()">ጥያቄ ላክ</button>
             </div>
